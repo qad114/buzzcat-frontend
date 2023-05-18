@@ -1,0 +1,54 @@
+.CourseInfoBox {
+  border-radius: 0.5rem;
+  display: flex;
+}
+
+.pane {
+  height: auto;
+}
+
+.pane.left {
+  border-radius: 0.5em 0 0 0.5em;
+  margin: 0;
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
+.pane.right {
+  border-radius: 0 0.5rem 0.5rem 0;
+  width: 80%;
+  padding: 2rem;
+  overflow-y: scroll;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+}
+
+.overview > div {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.overview > div:nth-child(1) {
+  padding-top: 0;
+}
+
+.title {
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.prereqList-nested.inactive {
+  display: none;
+}
+
+.prereqNode {
+  padding: 0.5em;
+  border-radius: 0.5em;
+  background-color: #202020;
+  border: 0;
+}

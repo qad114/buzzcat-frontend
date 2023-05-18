@@ -1,0 +1,132 @@
+/*
+This is the global stylesheet. Its contents are not scoped by CSS Modules.
+To refer to a class defined in this file in JavaScript, simply use the class
+name as a string. To refer to a class defined here in another CSS file, use :global(selector).
+*/
+
+:root {
+  /*
+  Theme colors are defined here.
+  Each theme consists of five colors, where the (n + 1)th and (n + 2)th 
+  colors are the colors that appear upon hovering and clicking on an 
+  element of the nth color, respectively.
+  Note that these colors should not be used in other CSS files directly
+  unless absolutely necessary. Instead, use the background color rules
+  defined below.
+  */
+
+  /* Dark theme */
+  --dark-bg-0: #101010;
+  --dark-bg-1: #1A1A1A;
+  --dark-bg-2: #202020;
+  --dark-bg-3: #252525;
+  --dark-bg-4: #2A2A2A;
+  --dark-bg-5: #303030;
+
+  /* Light theme */
+  --light-bg-0: #CFCFCF;
+  --light-bg-1: #D5D5D5;
+  --light-bg-2: #DADADA;
+  --light-bg-3: #DFDFDF;
+  --light-bg-4: #E5E5E5;
+  --light-bg-5: #EFEFEF;
+
+  --transition-time: 0.2s;
+}
+
+body {
+  margin: 0px;
+  color: #CCCCCC;
+  font-family: Roboto;/*Arial, Helvetica, sans-serif*/
+}
+
+button {
+  font-family: Roboto;
+  font-weight: normal;
+}
+
+button.dark {
+  color: #CCCCCC;
+}
+
+button.light {
+  color: #333333;
+}
+
+body > #root > div {
+  height: 100vh;
+}
+
+.dark {
+  color: #CCCCCC;
+  transition: all var(--transition-time) ease !important;
+}
+
+.dark.bg-0 {
+  background-color: var(--dark-bg-0);
+}
+
+.dark.bg-0.hoverable:hover, .dark.bg-1 {
+  background-color: var(--dark-bg-1);
+}
+
+.dark.bg-0.clickable:active, .dark.bg-1.hoverable:hover, .dark.bg-2 {
+  background-color: var(--dark-bg-2);
+}
+
+.dark.bg-1.clickable:active, .dark.bg-2.hoverable:hover, .dark.bg-3 {
+  background-color: var(--dark-bg-3);
+}
+
+.dark.bg-2.clickable:active, .dark.bg-3.hoverable:hover, .dark.bg-4 {
+  background-color: var(--dark-bg-4);
+}
+
+.dark.bg-3.clickable:active, .dark.bg-4.hoverable:hover, .dark.bg-5 {
+  background-color: var(--dark-bg-5);
+}
+
+.light {
+  color: #202020;
+  transition: all var(--transition-time) ease !important;
+}
+
+.light.bg-0 {
+  background-color: var(--light-bg-0);
+}
+
+.light.bg-0.hoverable:hover, .light.bg-1 {
+  background-color: var(--light-bg-1);
+}
+
+.light.bg-0.clickable:active, .light.bg-1.hoverable:hover, .light.bg-2 {
+  background-color: var(--light-bg-2);
+}
+
+.light.bg-1.clickable:active, .light.bg-2.hoverable:hover, .light.bg-3 {
+  background-color: var(--light-bg-3);
+}
+
+.light.bg-2.clickable:active, .light.bg-3.hoverable:hover, .light.bg-4 {
+  background-color: var(--light-bg-4);
+}
+
+.light.bg-3.clickable:active, .light.bg-4.hoverable:hover, .light.bg-5 {
+  background-color: var(--light-bg-5);
+}
+
+::-webkit-scrollbar {
+  overflow: overlay;
+  width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  /*border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;*/
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

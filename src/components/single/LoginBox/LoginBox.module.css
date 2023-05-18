@@ -1,0 +1,71 @@
+.LoginBox {
+  border-radius: 0.5rem;
+  display: flex;
+}
+
+.pane.left {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem 0 0 0.5rem;
+  font-size: inherit;
+}
+
+.pane.right {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginBenefits {
+  margin-left: 10%;
+  margin-right: 10%;
+  font-size: inherit;
+}
+
+.heading {
+  text-align: center;
+  font-size: 2vw;
+  font-weight: bold;
+}
+
+.detail {
+  text-align: center;
+  list-style: none;
+  list-style-position: inside;
+  font-size: 1.18vw;
+  margin-top: 0.5rem;
+}
+
+.login {
+  width: 75%;
+}
+
+.login > * {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  width: 100%;
+}
+
+.submit {
+  border-radius: 4px;
+  width: 100%;
+  border: 0;
+  outline: none;
+  color: gray;
+  background-color: #16351B;
+  padding: 0.6rem;
+  font-size: smaller;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.submit:hover {
+  transition: all 0.2s ease;
+  background-color: #194120;
+}

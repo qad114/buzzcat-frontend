@@ -1,0 +1,21 @@
+.CheckButton {
+  border-radius: 4px;
+  box-sizing: border-box;
+  width: 100%;
+  border: 0;
+  outline: none;
+  color: gray;
+  transition: all 0.2s ease;
+}
+
+.CheckButton:hover {
+  transition: all 0.2s ease;
+}
+
+.unchecked {
+  transition: all 0.075s ease;
+}
+
+.checked {
+  transition: all 0.075s ease;
+}

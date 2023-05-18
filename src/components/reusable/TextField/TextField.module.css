@@ -1,0 +1,17 @@
+/*.TextField {
+  border-radius: 4px;
+}*/
+
+.TextField {
+  border-radius: 4px;
+  padding: 1rem;
+  box-sizing: border-box;
+  border: 0;
+  outline: none;
+  color: gray;
+}
+
+.TextField:focus {
+  border: 0;
+  outline: none;
+}

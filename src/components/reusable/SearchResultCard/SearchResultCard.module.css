@@ -1,0 +1,46 @@
+.SearchResultCard {
+  padding: 0.5rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  /*justify-content: space-between;*/
+}
+
+.row > * {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+  font-size: large;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.tag {
+  border-radius: 4px;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  color: gray;
+  white-space: nowrap;
+}
+
+.subjectAndNumber {
+  margin-left: 0;
+}
+
+.title {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.description {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
