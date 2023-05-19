@@ -9,8 +9,6 @@ function prereqsToHTML(root) {
     return (
       <li><button className={css.prereqNode}>{btn_text}</button>
         <ul className={css.prereqListNested}>
-          {/*prereqsToHTML(root.left)*/}
-          {/*prereqsToHTML(root.right)*/}
           {root.children.map((node) => prereqsToHTML(node))}
         </ul>
       </li>
@@ -29,11 +27,11 @@ function prereqsToHTML(root) {
 
 export default function CourseInfoBox({ className, course }) {
   const { theme } = useContext(ThemeContext);
-  const [tabs, setTabs] = useState([
+  /*const [tabs, setTabs] = useState([
     ["Overview", true],
     ["Sections/Professors", false],
     ["Prerequisites", false],
-  ]);
+  ]);*/
 
   const overview = course === null ? <></> : (
     <div className={css.overview}>
@@ -59,17 +57,11 @@ export default function CourseInfoBox({ className, course }) {
 
   return (
     <div className={[css.CourseInfoBox, theme, 'bg-4', className].join(' ')}>
-      <div className={[css.pane, css.left, theme, 'bg-5'].join(' ')}>
-        <Tabs state={[tabs, setTabs]} />
-      </div>
-      <div className={[css.pane, css.right, theme, 'bg-4'].join(' ')}>
-        {
-          tabs[0][1] ? overview :
-          tabs[1][1] ? <></> :
-          tabs[2][1] ? prerequisites :
-          <></>
-        }
-      </div>
+      <Tabs className={css.Tabs} views={[
+        ["Overview", overview],
+        ["Sections/Professors", <></>],
+        ["Prerequisities", prerequisites]
+      ]} />
     </div>
   )
 }
