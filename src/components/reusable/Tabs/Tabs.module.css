@@ -1,9 +1,14 @@
 .Tabs {
   display: flex;
+  width: 100%;
+}
+
+.tabContainer {
+  display: flex;
   flex-direction: column;
 }
 
-.Tabs > button {
+.tabContainer > button {
   text-align: start;
   font-size: large;
   width: 100%;
@@ -13,12 +18,12 @@
   transition: all 0.2s ease;
 }
 
-.Tabs > button:hover {
+.tabContainer > button:hover {
   transition: all 0.2s ease;
   background-color: #AAAAAA30;
 }
 
-.Tabs > button.active {
+.tabContainer > button.active {
   transition: all 0.2s ease;
   background-color: #AAAAAA20;
 }

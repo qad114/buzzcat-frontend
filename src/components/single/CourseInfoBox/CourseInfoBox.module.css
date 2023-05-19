@@ -3,6 +3,15 @@
   display: flex;
 }
 
+.Tabs :global(.Tabs__tabContainer) {
+  min-width: 25%;
+  overflow-y: scroll;
+}
+
+.Tabs :global(.Tabs__viewContainer) {
+  padding: 2rem;
+}
+
 .pane {
   height: auto;
 }
