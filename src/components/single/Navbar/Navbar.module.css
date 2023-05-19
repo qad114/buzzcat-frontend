@@ -5,6 +5,14 @@
   margin: 0px;
 }
 
+:global(.App.dark) .Navbar {
+  background-color: var(--dark-bg-color);
+}
+
+:global(.App.light) .Navbar {
+  background-color: var(--light-bg-color);
+}
+
 .heading {
   position: relative;
   top: 0;
@@ -12,7 +20,6 @@
   margin-top: auto;
   margin-bottom: auto;
   padding-left: 0.5rem;
-  /*color: gold;*/
   font-weight: lighter;
 }
 
@@ -35,7 +42,6 @@
   border-radius: 0.2rem;
   background-color: transparent;
   border-color: transparent;
-  /*color: gold;*/
   font-size: medium;
   transition: all 0.2s;
 }

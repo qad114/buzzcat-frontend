@@ -1,7 +1,6 @@
-import { useContext, useState } from 'react'
-import { ThemeContext } from '../../../contexts/ThemeContext';
-import Tabs from '../../reusable/Tabs/Tabs'
-import css from './CourseInfoBox.module.css'
+import { useContext, useState } from 'react';
+import Tabs from '../../reusable/Tabs/Tabs';
+import css from './CourseInfoBox.module.css';
 
 function prereqsToHTML(root) {
   if (root.type === 'operator') {
@@ -26,7 +25,6 @@ function prereqsToHTML(root) {
 }
 
 export default function CourseInfoBox({ className, course }) {
-  const { theme } = useContext(ThemeContext);
   /*const [tabs, setTabs] = useState([
     ["Overview", true],
     ["Sections/Professors", false],
@@ -56,7 +54,7 @@ export default function CourseInfoBox({ className, course }) {
   )
 
   return (
-    <div className={[css.CourseInfoBox, theme, 'bg-4', className].join(' ')}>
+    <div className={[css.CourseInfoBox, className].join(' ')}>
       <Tabs className={css.Tabs} views={[
         ["Overview", overview],
         ["Sections/Professors", <></>],

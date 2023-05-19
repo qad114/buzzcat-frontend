@@ -13,6 +13,14 @@
   font-size: inherit;
 }
 
+:global(.App.dark) .pane.left {
+  background-color: var(--dark-left-pane-bg-color);
+}
+
+:global(.App.light) .pane.left {
+  background-color: var(--light-left-pane-bg-color);
+}
+
 .pane.right {
   width: 50%;
   height: 100%;
@@ -20,6 +28,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+:global(.App.dark) .pane.right {
+  background-color: var(--dark-right-pane-bg-color);
+}
+
+:global(.App.light) .pane.right {
+  background-color: var(--light-right-pane-bg-color);
 }
 
 .loginBenefits {
@@ -51,6 +67,30 @@
   margin-bottom: 0.25rem;
   width: 100%;
 }
+
+/*:global(.App.dark) .email, :global(.App.dark) .password {
+  background-color: var(--dark-text-field-bg-color);
+}
+
+:global(.App.light) .email, :global(.App.light) .password {
+  background-color: var(--light-text-field-bg-color);
+}
+
+:global(.App.dark) .email:hover, :global(.App.dark) .password:hover {
+  background-color: var(--dark-text-field-bg-color);
+}
+
+:global(.App.light) .email:hover, :global(.App.light) .password:hover {
+  background-color: var(--light-text-field-bg-color);
+}*/
+
+.email, .password {
+  --dark-bg-color: var(--dark-text-field-bg-color);
+  --light-bg-color: var(--light-text-field-bg-color);
+  --dark-hover-bg-color: var(--dark-text-field-hover-bg-color);
+  --light-hover-bg-color: var(--light-text-field-hover-bg-color);
+}
+
 
 .submit {
   border-radius: 4px;

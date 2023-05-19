@@ -3,6 +3,14 @@
   display: flex;
 }
 
+:global(.App.dark) .CourseInfoBox {
+  background-color: var(--dark-bg-color);
+}
+
+:global(.App.light) .CourseInfoBox {
+  background-color: var(--light-bg-color);
+}
+
 .Tabs :global(.Tabs__tabContainer) {
   min-width: 25%;
   overflow-y: scroll;
