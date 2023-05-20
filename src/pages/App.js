@@ -24,7 +24,7 @@ export default function App() {
     free: useState(false),
     honors: useState(false)
   };*/
-
+  
   const [theme, setTheme] = useState('dark');
 
   const [loginMode, setLoginMode] = useState(false);
@@ -70,7 +70,7 @@ export default function App() {
         <Navbar className={css.Navbar} onThemeButtonClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark');}} onLoginButtonClick={() => {setLoginMode(!loginMode);}} />
         <div className={css.body}>
 
-          <div className={[css.pane, css.left].join(' ')}>
+          <div className={[css.pane, css.left, currentCourse === null ? css.active : css.inactive].join(' ')}>
 
             <TextField className={[css.TextField, css.search].join(' ')} defaultText={'Search...'} inputRef={searchInput} onChange={onTextFieldChange} />
             
@@ -88,7 +88,7 @@ export default function App() {
 
           </div>
 
-          <div className={[css.pane, css.right].join(' ')} ref={rightPane} onScroll={() => {
+          <div className={[css.pane, css.right, currentCourse === null ? css.active : css.inactive].join(' ')} ref={rightPane} onScroll={() => {
             // Check if we have scrolled to the bottom
             const scrollOffset = rightPane.current.scrollHeight - rightPane.current.scrollTop - rightPane.current.clientHeight;
             console.log(scrollOffset);
@@ -98,15 +98,22 @@ export default function App() {
               setSearchOffset(searchOffset + PAGE_SIZE);
             }
           }}>
-            {searchResults.map((entry, index) => <SearchResultCard className={css.SearchResultCard} key={entry.subject + entry.number} result={entry} onClick={() => {onCourseCardClick(index);}} />)}
+            {searchResults.map((entry, index) => <SearchResultCard className={[css.SearchResultCard, currentCourse === entry ? css.active : css.inactive].join(' ')} key={entry.subject + entry.number} result={entry} onClick={() => {onCourseCardClick(index);}} />)}
           </div>
+
+          <CourseInfoBox
+            className={[css.CourseInfoBox, currentCourse === null ? css.inactive : css.active].join(' ')}
+            course={currentCourse} 
+            onCrossButtonClick={() => setCurrentCourse(null)} />
 
         </div>
         {/*<Footer />*/}
 
-        <div className={[css.bgOverlay, loginMode || (currentCourse !== null) ? css.active : css.inactive].join(' ')} onClick={() => {setLoginMode(false); setCurrentCourse(null);}} />
+        <div className={[css.bgOverlay, loginMode ? css.active : css.inactive].join(' ')} onClick={() => {setLoginMode(false); setCurrentCourse(null);}} />
         <LoginBox className={[css.LoginBox, loginMode ? css.active : css.inactive].join(' ')} />
-        <CourseInfoBox className={[css.CourseInfoBox, currentCourse === null ? css.inactive : css.active].join(' ')} course={currentCourse} />
+        {/*
+          <CourseInfoBox className={[css.CourseInfoBox, currentCourse === null ? css.inactive : css.active].join(' ')} course={currentCourse} />
+        */}
       </div>
     </ThemeContext.Provider>
   );

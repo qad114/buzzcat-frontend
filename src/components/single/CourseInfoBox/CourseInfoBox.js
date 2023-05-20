@@ -24,7 +24,7 @@ function prereqsToHTML(root) {
   }
 }
 
-export default function CourseInfoBox({ className, course }) {
+export default function CourseInfoBox({ className, course, onCrossButtonClick }) {
   /*const [tabs, setTabs] = useState([
     ["Overview", true],
     ["Sections/Professors", false],
@@ -55,10 +55,11 @@ export default function CourseInfoBox({ className, course }) {
 
   return (
     <div className={[css.CourseInfoBox, className].join(' ')}>
+      <button className={css.cross} onClick={onCrossButtonClick}>X</button>
       <Tabs className={css.Tabs} views={[
         ["Overview", overview],
         ["Sections/Professors", <></>],
-        ["Prerequisities", prerequisites]
+        ["Prerequisites", prerequisites]
       ]} />
     </div>
   )

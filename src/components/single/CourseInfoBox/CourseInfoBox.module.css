@@ -1,6 +1,7 @@
 .CourseInfoBox {
   border-radius: 0.5rem;
   display: flex;
+  position: relative;
 }
 
 :global(.App.dark) .CourseInfoBox {
@@ -9,6 +10,15 @@
 
 :global(.App.light) .CourseInfoBox {
   background-color: var(--light-bg-color);
+}
+
+.cross {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: darkred;
+  border-width: 0;
+  padding: 0.5rem;
 }
 
 .Tabs :global(.Tabs__tabContainer) {
