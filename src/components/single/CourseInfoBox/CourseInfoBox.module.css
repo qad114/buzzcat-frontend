@@ -30,26 +30,6 @@
   padding: 2rem;
 }
 
-.pane {
-  height: auto;
-}
-
-.pane.left {
-  border-radius: 0.5em 0 0 0.5em;
-  margin: 0;
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-}
-
-.pane.right {
-  border-radius: 0 0.5rem 0.5rem 0;
-  width: 80%;
-  padding: 2rem;
-  overflow-y: scroll;
-}
-
 .overview {
   display: flex;
   flex-direction: column;
