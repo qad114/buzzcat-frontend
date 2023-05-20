@@ -59,7 +59,9 @@ body > #root > div {
 
 .App.dark * {
   color: #CCCCCC;
-  transition: all var(--transition-time) ease !important;
+  transition-property: background-color, border-color, color, opacity;
+  transition-duration: var(--transition-time);
+  transition-timing-function: ease;
 }
 
 /*.dark.bg-0 {
@@ -88,7 +90,9 @@ body > #root > div {
 
 .App.light * {
   color: #202020;
-  transition: all var(--transition-time) ease !important;
+  transition-property: background-color, border-color, color, opacity;
+  transition-duration: var(--transition-time);
+  transition-timing-function: ease;
 }
 
 /*.light.bg-0 {

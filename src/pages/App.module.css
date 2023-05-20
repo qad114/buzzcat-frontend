@@ -8,6 +8,9 @@
   flex: auto;
   display: flex;
   overflow: auto;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 :global(.App.dark) .body {
@@ -45,13 +48,8 @@
   --tag-background-color: var(--light-bg-2);
 }
 
-.pane {
-  margin-bottom: 1rem;
-}
-
 .pane.left {
   width: 30%;
-  margin-left: 1rem;
   padding: 1rem;
   border-radius: 0.5rem 0 0 0.5rem;
 
@@ -70,15 +68,25 @@
   flex-direction: row;
 }
 
+.pane.left.inactive {
+  width: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .pane.right {
   display: flex;
   flex-direction: column;
   width: 70%;
-  margin-right: 1rem;
   border-radius: 0 0.5rem 0.5rem 0;
   overflow-y: scroll;
   /*-ms-overflow-style: none;*/  /* IE, Legacy Edge */
   /*scrollbar-width: 16px;*/  /* Firefox */
+}
+
+.pane.right.inactive {
+  width: 30%;
+  border-radius: 0.5rem;
 }
 
 .TextField {
@@ -116,7 +124,8 @@
 }
 
 .SearchResultCard {
-  padding: 1rem !important;
+  min-height: 4.5rem;
+  padding: 1rem;
   transition: all 0.2s ease;
   --dark-bg-color: var(--dark-bg-4);
   --light-bg-color: var(--light-bg-4);
@@ -128,6 +137,11 @@
   --light-tag-text-color: dimgray;
   --dark-divider-color: var(--dark-bg-3);
   --light-divider-color: var(--light-bg-3);
+}
+
+.SearchResultCard.active {
+  --dark-bg-color: var(--dark-bg-5);
+  --light-bg-color: var(--light-bg-5);
 }
 
 .SearchResultCard:hover {
@@ -180,22 +194,21 @@
 }
 
 .CourseInfoBox {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 80%;
-  height: 85%;
+  width: 70%;
+  height: 100%;
+  margin-left: 1rem;
   transition: all 0.2s ease;
+  overflow-y: scroll;
   --dark-bg-color: var(--dark-bg-4);
   --light-bg-color: var(--light-bg-4);
+  --dark-cross-btn-bg-color: var(--dark-bg-3);
+  --light-cross-btn-bg-color: var(--light-bg-3);
 }
 
 .CourseInfoBox.inactive {
   visibility: hidden;
-  opacity: 0;
+  width: 0;
+  margin: 0;
 }
 
 @media only screen and (max-device-width: 480px) {

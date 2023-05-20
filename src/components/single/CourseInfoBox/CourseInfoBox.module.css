@@ -1,6 +1,7 @@
 .CourseInfoBox {
   border-radius: 0.5rem;
   display: flex;
+  position: relative;
 }
 
 :global(.App.dark) .CourseInfoBox {
@@ -11,6 +12,23 @@
   background-color: var(--light-bg-color);
 }
 
+.cross {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  border-width: 0;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+:global(.App.dark) .cross {
+  background-color: var(--dark-cross-btn-bg-color);
+}
+
+:global(.App.light) .cross {
+  background-color: var(--light-cross-btn-bg-color);
+}
+
 .Tabs :global(.Tabs__tabContainer) {
   min-width: 25%;
   overflow-y: scroll;
@@ -18,26 +36,6 @@
 
 .Tabs :global(.Tabs__viewContainer) {
   padding: 2rem;
-}
-
-.pane {
-  height: auto;
-}
-
-.pane.left {
-  border-radius: 0.5em 0 0 0.5em;
-  margin: 0;
-  width: 20%;
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-}
-
-.pane.right {
-  border-radius: 0 0.5rem 0.5rem 0;
-  width: 80%;
-  padding: 2rem;
-  overflow-y: scroll;
 }
 
 .overview {
