@@ -4,15 +4,16 @@
   width: 100%;
   border: 0;
   outline: none;
-  color: gray;
   transition: all 0.2s ease;
 }
 
 :global(.App.dark) .CheckButton {
+  color: var(--dark-text-color);
   background-color: var(--dark-bg-color);
 }
 
 :global(.App.light) .CheckButton {
+  color: var(--light-text-color);
   background-color: var(--light-bg-color);
 }
 

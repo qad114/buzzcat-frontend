@@ -37,6 +37,8 @@
 .Navbar {
   --dark-bg-color: var(--dark-bg-0);
   --light-bg-color: var(--light-bg-0);
+  --dark-item-hover-bg-color: var(--dark-bg-1);
+  --light-item-hover-bg-color: var(--light-bg-1);
 }
 
 :global(.App.light) .SearchResultCard {
@@ -122,6 +124,8 @@
   --light-hover-bg-color: var(--light-bg-5);
   --dark-tag-bg-color: var(--dark-bg-2);
   --light-tag-bg-color: var(--light-bg-2);
+  --dark-tag-text-color: gray;
+  --light-tag-text-color: dimgray;
   --dark-divider-color: var(--dark-bg-3);
   --light-divider-color: var(--light-bg-3);
 }
@@ -164,6 +168,10 @@
   --light-text-field-bg-color: var(--light-bg-1);
   --dark-text-field-hover-bg-color: var(--dark-bg-2);
   --light-text-field-hover-bg-color: var(--light-bg-2);
+  --dark-submit-btn-bg-color: #0B492F;
+  --light-submit-btn-bg-color: #77E4B6;
+  --dark-submit-btn-hover-bg-color: #0B5335;
+  --light-submit-btn-hover-bg-color: #7BF4C1;
 }
 
 .LoginBox.inactive {

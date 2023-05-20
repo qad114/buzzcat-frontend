@@ -105,7 +105,24 @@
   transition: all 0.2s ease;
 }
 
+:global(.App.dark) .submit {
+  color: var(--dark-submit-btn-text-color);
+  background-color: var(--dark-submit-btn-bg-color);
+}
+
+:global(.App.light) .submit {
+  color: var(--light-submit-btn-text-color);
+  background-color: var(--light-submit-btn-bg-color);
+}
+
 .submit:hover {
   transition: all 0.2s ease;
-  background-color: #194120;
+}
+
+:global(.App.dark) .submit:hover {
+  background-color: var(--dark-submit-btn-hover-bg-color);
+}
+
+:global(.App.light) .submit:hover {
+  background-color: var(--light-submit-btn-hover-bg-color);
 }

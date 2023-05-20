@@ -43,15 +43,16 @@
   padding-bottom: 0.1rem;
   padding-left: 0.3rem;
   padding-right: 0.3rem;
-  color: gray;
   white-space: nowrap;
 }
 
 :global(.App.dark) .tag {
+  color: var(--dark-tag-text-color);
   background-color: var(--dark-tag-bg-color);
 }
 
 :global(.App.light) .tag {
+  color: var(--light-tag-text-color);
   background-color: var(--light-tag-bg-color);
 }
 
