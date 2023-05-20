@@ -44,10 +44,6 @@
   --light-item-hover-bg-color: var(--light-bg-1);
 }
 
-:global(.App.light) .SearchResultCard {
-  --tag-background-color: var(--light-bg-2);
-}
-
 .pane.left {
   width: 30%;
   padding: 1rem;
@@ -123,7 +119,7 @@
   font-size: smaller;
 }
 
-.SearchResultCard {
+.ListItem {
   min-height: 4.5rem;
   padding: 1rem;
   transition: all 0.2s ease;
@@ -139,12 +135,12 @@
   --light-divider-color: var(--light-bg-3);
 }
 
-.SearchResultCard.active {
+.ListItem.active {
   --dark-bg-color: var(--dark-bg-5);
   --light-bg-color: var(--light-bg-5);
 }
 
-.SearchResultCard:hover {
+.ListItem:hover {
   transition: all 0.2s ease;
 }
 

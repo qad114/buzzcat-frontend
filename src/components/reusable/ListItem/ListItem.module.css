@@ -1,18 +1,18 @@
-:global(.App.dark) .SearchResultCard {
+:global(.App.dark) .ListItem {
   background-color: var(--dark-bg-color);
   border-bottom: 1px solid var(--dark-divider-color);
 }
 
-:global(.App.light) .SearchResultCard {
+:global(.App.light) .ListItem {
   background-color: var(--light-bg-color);
   border-bottom: 1px solid var(--light-divider-color);
 }
 
-:global(.App.dark) .SearchResultCard:hover {
+:global(.App.dark) .ListItem:hover {
   background-color: var(--dark-hover-bg-color);
 }
 
-:global(.App.light) .SearchResultCard:hover {
+:global(.App.light) .ListItem:hover {
   background-color: var(--light-hover-bg-color);
 }
 
@@ -31,6 +31,14 @@
   bottom: 0;
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.row > *:first-child {
+  margin-left: 0;
+}
+
+.row > *:nth-last-child(2) {
+  margin-right: 0.5rem;
 }
 
 .tag {
@@ -52,18 +60,14 @@
   background-color: var(--light-tag-bg-color);
 }
 
-.subjectAndNumber {
-  margin-left: 0;
-}
-
-.title {
+.mainText {
   font-weight: bold;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.description {
+.subText {
   width: 100%;
   margin-top: 0.5rem;
   font-size: 0.95rem;
