@@ -2,6 +2,24 @@
   padding: 0.5rem;
 }
 
+:global(.App.dark) .SearchResultCard {
+  background-color: var(--dark-bg-color);
+  border-bottom: 1px solid var(--dark-divider-color);
+}
+
+:global(.App.light) .SearchResultCard {
+  background-color: var(--light-bg-color);
+  border-bottom: 1px solid var(--light-divider-color);
+}
+
+:global(.App.dark) .SearchResultCard:hover {
+  background-color: var(--dark-hover-bg-color);
+}
+
+:global(.App.light) .SearchResultCard:hover {
+  background-color: var(--light-hover-bg-color);
+}
+
 .row {
   display: flex;
   flex-direction: row;
@@ -25,8 +43,17 @@
   padding-bottom: 0.1rem;
   padding-left: 0.3rem;
   padding-right: 0.3rem;
-  color: gray;
   white-space: nowrap;
+}
+
+:global(.App.dark) .tag {
+  color: var(--dark-tag-text-color);
+  background-color: var(--dark-tag-bg-color);
+}
+
+:global(.App.light) .tag {
+  color: var(--light-tag-text-color);
+  background-color: var(--light-tag-bg-color);
 }
 
 .subjectAndNumber {

@@ -4,12 +4,29 @@
   width: 100%;
   border: 0;
   outline: none;
-  color: gray;
   transition: all 0.2s ease;
+}
+
+:global(.App.dark) .CheckButton {
+  color: var(--dark-text-color);
+  background-color: var(--dark-bg-color);
+}
+
+:global(.App.light) .CheckButton {
+  color: var(--light-text-color);
+  background-color: var(--light-bg-color);
 }
 
 .CheckButton:hover {
   transition: all 0.2s ease;
+}
+
+:global(.App.dark) .CheckButton:hover {
+  background-color: var(--dark-hover-bg-color);
+}
+
+:global(.App.light) .CheckButton:hover {
+  background-color: var(--light-hover-bg-color);
 }
 
 .unchecked {
@@ -18,4 +35,12 @@
 
 .checked {
   transition: all 0.075s ease;
+}
+
+:global(.App.dark) .CheckButton:active {
+  background-color: var(--dark-checked-bg-color);
+}
+
+:global(.App.light) .CheckButton:active {
+  background-color: var(--light-checked-bg-color);
 }

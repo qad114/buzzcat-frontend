@@ -57,12 +57,12 @@ body > #root > div {
   height: 100vh;
 }
 
-.dark {
+.App.dark * {
   color: #CCCCCC;
   transition: all var(--transition-time) ease !important;
 }
 
-.dark.bg-0 {
+/*.dark.bg-0 {
   background-color: var(--dark-bg-0);
 }
 
@@ -84,14 +84,14 @@ body > #root > div {
 
 .dark.bg-3.clickable:active, .dark.bg-4.hoverable:hover, .dark.bg-5 {
   background-color: var(--dark-bg-5);
-}
+}*/
 
-.light {
+.App.light * {
   color: #202020;
   transition: all var(--transition-time) ease !important;
 }
 
-.light.bg-0 {
+/*.light.bg-0 {
   background-color: var(--light-bg-0);
 }
 
@@ -113,7 +113,7 @@ body > #root > div {
 
 .light.bg-3.clickable:active, .light.bg-4.hoverable:hover, .light.bg-5 {
   background-color: var(--light-bg-5);
-}
+}*/
 
 ::-webkit-scrollbar {
   overflow: overlay;

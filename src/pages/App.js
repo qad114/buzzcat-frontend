@@ -66,47 +66,29 @@ export default function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={[css.App, theme].join(' ')}>
-        <Navbar className={[css.Navbar, theme, 'bg-0'].join(' ')} onThemeButtonClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark');}} onLoginButtonClick={() => {setLoginMode(!loginMode);}} />
-        <div className={[css.body, theme, 'bg-0'].join(' ')}>
+      <div className={['App', css.App, theme].join(' ')}> {/* Global 'App' class allows all components to get the current theme using pure CSS */}
+        <Navbar className={css.Navbar} onThemeButtonClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark');}} onLoginButtonClick={() => {setLoginMode(!loginMode);}} />
+        <div className={css.body}>
 
-          <div className={[css.pane, css.left, theme, 'bg-5'].join(' ')}>
+          <div className={[css.pane, css.left].join(' ')}>
 
-            <TextField className={[css.TextField, css.search, theme, 'bg-3', 'hoverable'].join(' ')} defaultText={'Search...'} inputRef={searchInput} onChange={onTextFieldChange} />
+            <TextField className={[css.TextField, css.search].join(' ')} defaultText={'Search...'} inputRef={searchInput} onChange={onTextFieldChange} />
             
-            <div className={[css.subheading, theme].join(' ')}>Credits</div>
+            <div className={css.subheading}>Credits</div>
             <div className={css.row}>
-              <TextField className={[css.TextField, css.credits, css.start, theme, 'bg-3', 'hoverable'].join(' ')} defaultText={'Min'} inputRef={creditsMinInput} onChange={() => {
+              <TextField className={[css.TextField, css.credits, css.start].join(' ')} defaultText={'Min'} inputRef={creditsMinInput} onChange={() => {
                 creditsMinInput.current.value = creditsMinInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
                 onTextFieldChange();
               }} />
-              <TextField className={[css.TextField, css.credits, css.end, theme, 'bg-3', 'hoverable'].join(' ')} defaultText={'Max'} inputRef={creditsMaxInput} onChange={() => {
+              <TextField className={[css.TextField, css.credits, css.end].join(' ')} defaultText={'Max'} inputRef={creditsMaxInput} onChange={() => {
                 creditsMaxInput.current.value = creditsMaxInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
                 onTextFieldChange();
               }} />
             </div>
 
-            {/*<div className={`App-pane-left-subheading ${theme}`}>Attributes</div>
-            <div className='App-pane-left-row'>
-              <CheckButton className={`attrs App-check-button-attrs--0 ${theme} bg-3`} text={'Humanities'} state={attributes.humanities} />
-              <CheckButton className={`attrs App-check-button-attrs--1 ${theme} bg-3`} text={'Social Sciences'} state={attributes.socialSciences} />
-              <CheckButton className={`attrs App-check-button-attrs--2 ${theme} bg-3`} text={'STEM'} state={attributes.stem} />
-            </div>
-            <div className='App-pane-left-row'>
-              <CheckButton className={`attrs App-check-button-attrs--3 ${theme} bg-3`} text={'Low cost txtbk(s)'} state={attributes.lowCost} />
-              <CheckButton className={`attrs App-check-button-attrs--4 ${theme} bg-3`} text={'Free txtbk(s)'} state={attributes.free} />
-              <CheckButton className={`attrs App-check-button-attrs--5 ${theme} bg-3`} text={'Honors'} state={attributes.honors} />
-            </div>
-
-            <div className='App-pane-left-subheading dark'>Campuses</div>
-            <div className='App-pane-left-row'>
-              <CheckButton className={`App-check-button App-check-button-campuses App-check-button-campuses--0 ${theme} bg-3`} text={'Atlanta'} state={useState(false)} />
-              <CheckButton className={`App-check-button App-check-button-campuses App-check-button-campuses--1 ${theme} bg-3`} text={'Online'} state={useState(false)} />
-            </div>*/}
-
           </div>
 
-          <div className={[css.pane, css.right, theme, 'bg-4'].join(' ')} ref={rightPane} onScroll={() => {
+          <div className={[css.pane, css.right].join(' ')} ref={rightPane} onScroll={() => {
             // Check if we have scrolled to the bottom
             const scrollOffset = rightPane.current.scrollHeight - rightPane.current.scrollTop - rightPane.current.clientHeight;
             console.log(scrollOffset);
@@ -116,15 +98,15 @@ export default function App() {
               setSearchOffset(searchOffset + PAGE_SIZE);
             }
           }}>
-            {searchResults.map((entry, index) => <SearchResultCard className={[css.SearchResultCard, theme, 'bg-4', 'hoverable'].join(' ')} key={entry.subject + entry.number} result={entry} onClick={() => {onCourseCardClick(index);}} />)}
+            {searchResults.map((entry, index) => <SearchResultCard className={css.SearchResultCard} key={entry.subject + entry.number} result={entry} onClick={() => {onCourseCardClick(index);}} />)}
           </div>
 
         </div>
         {/*<Footer />*/}
 
-        <div className={[css.bgOverlay, loginMode || (currentCourse !== null) ? css.active : css.inactive, theme].join(' ')} onClick={() => {setLoginMode(false); setCurrentCourse(null);}} />
+        <div className={[css.bgOverlay, loginMode || (currentCourse !== null) ? css.active : css.inactive].join(' ')} onClick={() => {setLoginMode(false); setCurrentCourse(null);}} />
         <LoginBox className={[css.LoginBox, loginMode ? css.active : css.inactive].join(' ')} />
-        <CourseInfoBox className={[css.CourseInfoBox, currentCourse === null ? css.inactive : css.active, theme].join(' ')} course={currentCourse} />
+        <CourseInfoBox className={[css.CourseInfoBox, currentCourse === null ? css.inactive : css.active].join(' ')} course={currentCourse} />
       </div>
     </ThemeContext.Provider>
   );
