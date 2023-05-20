@@ -14,11 +14,19 @@
 
 .cross {
   position: absolute;
-  top: 0;
-  right: 0;
-  background-color: darkred;
+  top: 1rem;
+  right: 1rem;
   border-width: 0;
+  border-radius: 0.5rem;
   padding: 0.5rem;
+}
+
+:global(.App.dark) .cross {
+  background-color: var(--dark-cross-btn-bg-color);
+}
+
+:global(.App.light) .cross {
+  background-color: var(--light-cross-btn-bg-color);
 }
 
 .Tabs :global(.Tabs__tabContainer) {

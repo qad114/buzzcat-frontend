@@ -201,6 +201,8 @@
   overflow-y: scroll;
   --dark-bg-color: var(--dark-bg-4);
   --light-bg-color: var(--light-bg-4);
+  --dark-cross-btn-bg-color: var(--dark-bg-3);
+  --light-cross-btn-bg-color: var(--light-bg-3);
 }
 
 .CourseInfoBox.inactive {
