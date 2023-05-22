@@ -120,7 +120,7 @@
 }
 
 .ListItem {
-  min-height: 4.5rem;
+  /*min-height: 4.5rem;*/
   padding: 1rem;
   transition: all 0.2s ease;
   --dark-bg-color: var(--dark-bg-4);
@@ -195,8 +195,19 @@
   margin-left: 1rem;
   transition: all 0.2s ease;
   overflow-y: scroll;
-  --dark-bg-color: var(--dark-bg-4);
-  --light-bg-color: var(--light-bg-4);
+
+  --dark-left-pane-bg-color: var(--dark-bg-4);
+  --light-left-pane-bg-color: var(--light-bg-4);
+  --dark-right-pane-bg-color: var(--dark-bg-3);
+  --light-right-pane-bg-color: var(--light-bg-3);
+
+  --dark-btn-bg-color: var(--dark-bg-4);
+  --light-btn-bg-color: var(--light-bg-4);
+  --dark-btn-hover-bg-color: var(--dark-bg-5);
+  --light-btn-hover-bg-color: var(--light-bg-5);
+  --dark-btn-divider-color: var(--dark-bg-2);
+  --light-btn-divider-color: var(--light-bg-2);
+  
   --dark-cross-btn-bg-color: var(--dark-bg-3);
   --light-cross-btn-bg-color: var(--light-bg-3);
 }

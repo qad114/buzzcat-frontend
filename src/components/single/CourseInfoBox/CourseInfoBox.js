@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react';
+import ListItem from '../../reusable/ListItem/ListItem';
 import Tabs from '../../reusable/Tabs/Tabs';
 import css from './CourseInfoBox.module.css';
 
@@ -53,14 +54,34 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
     </div>
   )
 
+  const views = [
+    ["Overview", overview],
+    ["Sections/Professors", <></>],
+    ["Prerequisites", prerequisites]
+  ]
+
+  const [viewIndex, setViewIndex] = useState(0);
+
   return (
     <div className={[css.CourseInfoBox, className].join(' ')}>
       <button className={css.cross} onClick={onCrossButtonClick}>X</button>
-      <Tabs className={css.Tabs} views={[
+      {/*<Tabs className={css.Tabs} views={[
         ["Overview", overview],
         ["Sections/Professors", <></>],
         ["Prerequisites", prerequisites]
-      ]} />
+      ]} />*/}
+      <div className={[css.pane, css.left].join(' ')}>
+        {views.map(([name, view], index) =>
+          <ListItem
+            className={[css.ListItem, index === viewIndex ? css.active : css.inactive].join(' ')}
+            mainText={name}
+            onClick={() => setViewIndex(index)}
+          />
+        )}
+      </div>
+      <div className={[css.pane, css.right].join(' ')}>
+        {views[viewIndex][1]}
+      </div>
     </div>
   )
 }
