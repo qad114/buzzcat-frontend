@@ -1,38 +1,19 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import ListItem from '../../reusable/ListItem/ListItem';
 import Tabs from '../../reusable/Tabs/Tabs';
 import css from './CourseInfoBox.module.css';
 
-function prereqsToHTML(root) {
-  if (root.type === 'operator') {
-    const btn_text = root.value === 'or' ? 'One or more of:' : 'All of:';
-    return (
-      <li><button className={css.prereqNode}>{btn_text}</button>
-        <ul className={css.prereqListNested}>
-          {root.children.map((node) => prereqsToHTML(node))}
-        </ul>
-      </li>
-    )
-  } else if (root.type === 'course') {
-    const btn_text = root.subject + ' ' + root.number;
-    return (
-      <li><button className={css.prereqNode}>{btn_text}</button></li>
-    )
-  } else if (root.type === 'test_score') {
-    return (
-      <li><button className={css.prereqNode}>{root.test + ' ' + root.score}</button></li>
-    )
-  }
-}
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function CourseInfoBox({ className, course, onCrossButtonClick }) {
-  /*const [tabs, setTabs] = useState([
-    ["Overview", true],
-    ["Sections/Professors", false],
-    ["Prerequisites", false],
-  ]);*/
+  const [prereqTree, setPrereqTree] = useState(null);
+  const [viewIndex, setViewIndex] = useState(0);
 
-  const overview = course === null ? <></> : (
+  useEffect(() => setPrereqTree(course === null ? {} : course.prerequisites), [course]);
+
+  if (course === null) return <></>;
+
+  const overview = (
     <div className={css.overview}>
       <div className={css.containerTitleDesc}>
         <div className={css.title}>{`${course.subject} ${course.number}: ${course.title}`}</div>
@@ -46,10 +27,77 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
     </div>
   )
 
-  const prerequisites = course === null ? <></> : (
+  function getPrereqs(subject, number, callback) {
+    fetch(`${BACKEND_URL}/get_course?term=202308&subject=${subject}&number=${number}`)
+      .then((res) => res.json())
+      .then((res) => callback(res.result === null ? {} : res.result.prerequisites));
+  }
+
+  function getTarget(tree, key) {
+    let newTree = tree;
+    for (let i = 0; i < key.length; i++) {
+      const index = parseInt(key.charAt(i));
+      newTree = newTree.children[index];
+    }
+    return newTree;
+  }
+
+  function onCourseNodeClick(subject, number, key) {
+    console.log(`clicked ${subject} ${number}`);
+    const copyTree = structuredClone(prereqTree);
+    const target = getTarget(copyTree, key);
+    /*const recurse = (root, callback) => {
+      console.log(root.type === 'course' ? root.subject + root.number : root.type);
+      if (root.type === 'course' && root.subject === subject && root.number === number) {
+        console.log('found');
+        root.children = [];
+        getPrereqs(root.subject, root.number, root.children, callback);
+      }
+      if (root.type !== 'operator') return;
+      for (const child of root.children) {
+        recurse(child, callback);
+      }
+    }
+    recurse(copyTree, (res, target) => {
+      target.push(res);
+      setPrereqTree(copyTree);
+    });*/
+    getPrereqs(target.subject, target.number, (res) => {
+      target.children = [res];
+      setPrereqTree(copyTree);
+    });
+  }
+
+  function prereqsToHTML(root, key = '') {
+    console.log(root);
+    if (root.type === 'operator') {
+      const text = root.value === 'or' ? 'One or more of:' : 'All of:';
+      return (
+        <li><span className={[css.prereqNode, css.operator].join(' ')}>{text}</span>
+          <ul className={css.prereqListNested}>
+            {root.children.map((node, index) => prereqsToHTML(node, key + index))}
+          </ul>
+        </li>
+      )
+    } else if (root.type === 'course') {
+      return (
+        <li><button className={[css.prereqNode, css.course].join(' ')} onClick={() => onCourseNodeClick(root.subject, root.number, key)}>{root.subject + ' ' + root.number}</button>
+          <ul className={css.prereqListNested}>
+            {root.children === undefined ? null : root.children.map((node, index) => prereqsToHTML(node, key + index))}
+          </ul>
+        </li>
+      )
+    } else if (root.type === 'test_score') {
+      return (
+        <li><span className={css.prereqNode}>{root.test + ' ' + root.score}</span></li>
+      )
+    }
+  }
+
+  const prerequisites = (
     <div className={css.prerequisites}>
       <ul>
-        {prereqsToHTML(course.prerequisites)}
+        {prereqsToHTML(prereqTree)}
       </ul>
     </div>
   )
@@ -59,8 +107,6 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
     ["Sections/Professors", <></>],
     ["Prerequisites", prerequisites]
   ]
-
-  const [viewIndex, setViewIndex] = useState(0);
 
   return (
     <div className={[css.CourseInfoBox, className].join(' ')}>
@@ -73,6 +119,7 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
       <div className={[css.pane, css.left].join(' ')}>
         {views.map(([name, view], index) =>
           <ListItem
+            key={name}
             className={[css.ListItem, index === viewIndex ? css.active : css.inactive].join(' ')}
             mainText={name}
             onClick={() => setViewIndex(index)}
