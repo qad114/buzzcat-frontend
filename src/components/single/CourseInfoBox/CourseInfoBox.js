@@ -1,6 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import ListItem from '../../reusable/ListItem/ListItem';
-import Tabs from '../../reusable/Tabs/Tabs';
 import css from './CourseInfoBox.module.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -111,11 +110,6 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
   return (
     <div className={[css.CourseInfoBox, className].join(' ')}>
       <button className={css.cross} onClick={onCrossButtonClick}>X</button>
-      {/*<Tabs className={css.Tabs} views={[
-        ["Overview", overview],
-        ["Sections/Professors", <></>],
-        ["Prerequisites", prerequisites]
-      ]} />*/}
       <div className={[css.pane, css.left].join(' ')}>
         {views.map(([name, view], index) =>
           <ListItem
