@@ -8,8 +8,8 @@ import CourseInfoBox from '../components/single/CourseInfoBox/CourseInfoBox';
 //import Footer from '../components/single/Footer/Footer';
 import LoginBox from '../components/single/LoginBox/LoginBox';
 import Navbar from '../components/single/Navbar/Navbar';
-import SearchResultCard from '../components/reusable/SearchResultCard/SearchResultCard';
 import TextField from '../components/reusable/TextField/TextField';
+import ListItem from '../components/reusable/ListItem/ListItem';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const INPUT_TIMEOUT = 200;
@@ -98,7 +98,20 @@ export default function App() {
               setSearchOffset(searchOffset + PAGE_SIZE);
             }
           }}>
-            {searchResults.map((entry, index) => <SearchResultCard className={[css.SearchResultCard, currentCourse === entry ? css.active : css.inactive].join(' ')} key={entry.subject + entry.number} result={entry} onClick={() => {onCourseCardClick(index);}} />)}
+            {/*searchResults.map((entry, index) => <SearchResultCard className={[css.SearchResultCard, currentCourse === entry ? css.active : css.inactive].join(' ')} key={entry.subject + entry.number} result={entry} onClick={() => {onCourseCardClick(index);}} />)*/}
+            {searchResults.map((entry, index) => 
+              <ListItem 
+                className={[css.ListItem, currentCourse === entry ? css.active : css.inactive].join(' ')}
+                key={entry.subject + ' ' + entry.number}
+                tags={[
+                  entry.subject + ' ' + entry.number,
+                  entry.credits_max ? `${entry.credits_min}-${entry.credits_max} credits` : `${entry.credits_min} ${entry.credits_min === 1 ? 'credit' : 'credits'}`
+                ]}
+                mainText={entry.title}
+                subText={entry.description}
+                onClick={() => onCourseCardClick(index)}
+              />
+            )}
           </div>
 
           <CourseInfoBox

@@ -2,14 +2,32 @@
   border-radius: 0.5rem;
   display: flex;
   position: relative;
+  display: flex;
 }
 
 :global(.App.dark) .CourseInfoBox {
-  background-color: var(--dark-bg-color);
+  background-color: var(--dark-right-pane-bg-color);
 }
 
 :global(.App.light) .CourseInfoBox {
-  background-color: var(--light-bg-color);
+  background-color: var(--light-right-pane-bg-color);
+}
+
+.pane.left {
+  width: 20%;
+}
+
+:global(.App.dark) .pane.left {
+  background-color: var(--dark-left-pane-bg-color);
+}
+
+:global(.App.light) .pane.left {
+  background-color: var(--light-left-pane-bg-color);
+}
+
+.pane.right {
+  width: 80%;
+  padding: 2rem;
 }
 
 .cross {
@@ -29,13 +47,27 @@
   background-color: var(--light-cross-btn-bg-color);
 }
 
-.Tabs :global(.Tabs__tabContainer) {
-  min-width: 25%;
-  overflow-y: scroll;
+.ListItem {
+  /*min-height: 4.5rem;*/
+  padding: 1rem;
+  transition: all 0.2s ease;
+  --dark-bg-color: var(--dark-bg-color);
+  --light-bg-color: var(--light-bg-color);
+  --dark-hover-bg-color: var(--dark-btn-hover-bg-color);
+  --light-hover-bg-color: var(--light-btn-hover-bg-color);
+  --dark-tag-text-color: gray;
+  --light-tag-text-color: dimgray;
+  --dark-divider-color: var(--dark-btn-divider-color);
+  --light-divider-color: var(--light-btn-divider-color);
 }
 
-.Tabs :global(.Tabs__viewContainer) {
-  padding: 2rem;
+.ListItem.active {
+  --dark-bg-color: var(--dark-btn-hover-bg-color);
+  --light-bg-color: var(--light-btn-hover-bg-color);
+}
+
+.ListItem:hover {
+  transition: all 0.2s ease;
 }
 
 .overview {
