@@ -61,7 +61,7 @@ export default function App() {
 
   function onCourseCardClick(index) {
     const course = searchResults[index];
-    setCurrentCourse(course);
+    setCurrentCourse(currentCourse === course ? null : course);
   }
 
   return (
