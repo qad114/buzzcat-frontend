@@ -28,7 +28,7 @@
 
 .pane.right {
   width: 75%;
-  padding: 2rem;
+  /*padding: 2rem;*/
   overflow-x: scroll;
   overflow-y: scroll;
 }
@@ -58,6 +58,8 @@
   --light-bg-color: var(--light-bg-color);
   --dark-hover-bg-color: var(--dark-btn-hover-bg-color);
   --light-hover-bg-color: var(--light-btn-hover-bg-color);
+  --dark-tag-bg-color: var(--dark-bg-2);
+  --light-tag-bg-color: var(--light-bg-2);
   --dark-tag-text-color: gray;
   --light-tag-text-color: dimgray;
   --dark-divider-color: var(--dark-btn-divider-color);
@@ -74,6 +76,7 @@
 }
 
 .overview {
+  margin: 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -90,6 +93,10 @@
 .title {
   font-size: xx-large;
   font-weight: bold;
+}
+
+.prerequisites {
+  margin: 2rem;
 }
 
 .prereqList-nested.inactive {

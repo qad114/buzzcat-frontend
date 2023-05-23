@@ -5,10 +5,23 @@ import css from './CourseInfoBox.module.css';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export default function CourseInfoBox({ className, course, onCrossButtonClick }) {
-  const [prereqTree, setPrereqTree] = useState(null);
+  const [prereqTree, setPrereqTree] = useState({});
+  const [sectionList, setSectionList] = useState([]);
   const [viewIndex, setViewIndex] = useState(0);
 
-  useEffect(() => setPrereqTree(course === null ? {} : course.prerequisites), [course]);
+  function getSections(subject, number, callback) {
+    fetch(`${BACKEND_URL}/get_sections?term=202308&subject=${subject}&number=${number}`)
+      .then((res) => res.json())
+      .then((res) => callback(res.result === null ? [] : res.result));
+  }
+
+  // Triggers when current course has changed
+  useEffect(() => {
+    if (course !== null) {
+      getSections(course.subject, course.number, (res) => setSectionList(res));
+      setPrereqTree(course.prerequisites);
+    }
+  }, [course]);
 
   if (course === null) return <></>;
 
@@ -23,6 +36,20 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
         <div style={{fontWeight: 'bold'}}>General information</div>
         <div>{`Credits: ${course.credits_max == null ? course.credits_min : course.credits_min + '-' + course.credits_max}`}</div>
       </div>
+    </div>
+  )
+
+  const sections = (
+    <div className={css.sections}>
+      {console.log(sectionList)}
+      {sectionList.map((section) => 
+        <ListItem
+          className={[css.ListItem, css.section].join(' ')}
+          tags={[section.section_name]}
+          mainText={section.title}
+          subText={`Campus: ${section.campus}`}
+        />
+      )}
     </div>
   )
 
@@ -45,22 +72,6 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
     console.log(`clicked ${subject} ${number}`);
     const copyTree = structuredClone(prereqTree);
     const target = getTarget(copyTree, key);
-    /*const recurse = (root, callback) => {
-      console.log(root.type === 'course' ? root.subject + root.number : root.type);
-      if (root.type === 'course' && root.subject === subject && root.number === number) {
-        console.log('found');
-        root.children = [];
-        getPrereqs(root.subject, root.number, root.children, callback);
-      }
-      if (root.type !== 'operator') return;
-      for (const child of root.children) {
-        recurse(child, callback);
-      }
-    }
-    recurse(copyTree, (res, target) => {
-      target.push(res);
-      setPrereqTree(copyTree);
-    });*/
     getPrereqs(target.subject, target.number, (res) => {
       target.children = [res];
       setPrereqTree(copyTree);
@@ -103,7 +114,7 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
 
   const views = [
     ["Overview", overview],
-    ["Sections/Professors", <></>],
+    ["Sections/Professors", sections],
     ["Prerequisites", prerequisites]
   ]
 
