@@ -45,7 +45,7 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
       {sectionList.map((section) => 
         <ListItem
           className={[css.ListItem, css.section].join(' ')}
-          tags={[section.section_name]}
+          tags={[section.section_name, section.crn]}
           mainText={section.title}
           subText={`Campus: ${section.campus}`}
         />
