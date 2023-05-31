@@ -16,15 +16,6 @@ const INPUT_TIMEOUT = 200;
 const PAGE_SIZE = 50;
 
 export default function App() {
-  /*const attributes = {
-    humanities: useState(false),
-    socialSciences: useState(false),
-    stem: useState(false),
-    lowCost: useState(false),
-    free: useState(false),
-    honors: useState(false)
-  };*/
-  
   const [theme, setTheme] = useState('dark');
 
   const [loginMode, setLoginMode] = useState(false);
@@ -105,7 +96,7 @@ export default function App() {
                 key={entry.subject + ' ' + entry.number}
                 tags={[
                   entry.subject + ' ' + entry.number,
-                  entry.credits_max ? `${entry.credits_min}-${entry.credits_max} credits` : `${entry.credits_min} ${entry.credits_min === 1 ? 'credit' : 'credits'}`
+                  entry.credits.operator === null ? `${entry.credits.low} credit${entry.credits.low === 1 ? '' : 's'}` : `${entry.credits.low} ${entry.credits.operator.toLowerCase()} ${entry.credits.high} credits`
                 ]}
                 mainText={entry.title}
                 subText={entry.description}

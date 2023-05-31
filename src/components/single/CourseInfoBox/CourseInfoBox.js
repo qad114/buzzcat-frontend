@@ -9,16 +9,10 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
   const [sectionList, setSectionList] = useState([]);
   const [viewIndex, setViewIndex] = useState(0);
 
-  function getSections(subject, number, callback) {
-    fetch(`${BACKEND_URL}/get_sections?term=202308&subject=${subject}&number=${number}`)
-      .then((res) => res.json())
-      .then((res) => callback(res.result === null ? [] : res.result));
-  }
-
   // Triggers when current course has changed
   useEffect(() => {
     if (course !== null) {
-      getSections(course.subject, course.number, (res) => setSectionList(res));
+      setSectionList(course.sections === undefined ? [] : course.sections);
       setPrereqTree(course.prerequisites);
     }
   }, [course]);
@@ -45,7 +39,7 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
       {sectionList.map((section) => 
         <ListItem
           className={[css.ListItem, css.section].join(' ')}
-          tags={[section.section_name, section.crn]}
+          tags={[section.id, section.crn]}
           mainText={section.title}
           subText={`Campus: ${section.campus}`}
         />
