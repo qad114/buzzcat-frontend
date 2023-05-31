@@ -1,4 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBuilding, faSchool, faUserTie, faXmark } from '@fortawesome/free-solid-svg-icons'
+
 import ListItem from '../../reusable/ListItem/ListItem';
 import css from './CourseInfoBox.module.css';
 
@@ -39,9 +42,33 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
       {sectionList.map((section) => 
         <ListItem
           className={[css.ListItem, css.section].join(' ')}
-          tags={[section.id, section.crn]}
-          mainText={section.title}
-          subText={`Campus: ${section.campus}`}
+          tags={[`CRN: ${section.crn}`]}
+          mainText={section.id}
+          subText={
+            <div className={css.details}>
+              <div>
+                <FontAwesomeIcon className={css.icon} icon={faSchool}/>
+                {section.campus}
+              </div>
+              <div>
+                <FontAwesomeIcon className={css.icon} icon={faBuilding}/>
+                {
+                  section.meetings.length > 0 && section.meetings[0].location.building !== null 
+                  ? section.meetings[0].location.building + ' ' + section.meetings[0].location.room 
+                  : 'None'
+                }
+              </div>
+              <div>
+                <FontAwesomeIcon className={css.icon} icon={faUserTie}/>
+                {
+                  section.faculty.length === 0 ? 'Unknown' : section.faculty.map(prof => {
+                    const [first, last] = prof.name.split(', ');
+                    return `${last} ${first}`;
+                  }).join(', ')
+                }
+              </div>
+            </div>
+          }
         />
       )}
     </div>
@@ -114,7 +141,9 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
 
   return (
     <div className={[css.CourseInfoBox, className].join(' ')}>
-      <button className={css.cross} onClick={onCrossButtonClick}>X</button>
+      <button className={css.cross} onClick={onCrossButtonClick}>
+        <FontAwesomeIcon icon={faXmark}/>
+      </button>
       <div className={[css.pane, css.left].join(' ')}>
         {views.map(([name, view], index) =>
           <ListItem

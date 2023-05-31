@@ -95,6 +95,12 @@
   font-weight: bold;
 }
 
+.icon {
+  margin-right: 0.2rem;
+  width: 2rem;
+  height: 0.9rem;
+}
+
 .prerequisites {
   margin: 2rem;
 }

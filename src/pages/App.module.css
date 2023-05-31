@@ -123,6 +123,7 @@
   /*min-height: 4.5rem;*/
   padding: 1rem;
   transition: all 0.2s ease;
+  --max-lines: 2;
   --dark-bg-color: var(--dark-bg-4);
   --light-bg-color: var(--light-bg-4);
   --dark-hover-bg-color: var(--dark-bg-5);
