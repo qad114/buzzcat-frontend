@@ -1,9 +1,10 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBuilding, faSchool, faUserTie, faXmark } from '@fortawesome/free-solid-svg-icons'
+import { faHashtag, faSchool, faUserTie, faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import ListItem from '../../reusable/ListItem/ListItem';
 import css from './CourseInfoBox.module.css';
+import WeeklySchedule from '../../reusable/WeeklySchedule/WeeklySchedule';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -42,30 +43,35 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
       {sectionList.map((section) => 
         <ListItem
           className={[css.ListItem, css.section].join(' ')}
-          tags={[`CRN: ${section.crn}`]}
+          tags={[
+            //`CRN: ${section.crn}`,
+            //section.credits.operator === null ? `${section.credits.low} credit${section.credits.low === 1 ? '' : 's'}` : `${section.credits.low} ${section.credits.operator.toLowerCase()} ${section.credits.high} credits`,
+            section.schedule_type.substring(0, section.schedule_type.length - 1)
+          ]}
           mainText={section.id}
           subText={
             <div className={css.details}>
-              <div>
-                <FontAwesomeIcon className={css.icon} icon={faSchool}/>
-                {section.campus}
+              <div className={[css.detailsContainer, css.left].join(' ')}>
+                <div>
+                  <FontAwesomeIcon className={css.icon} icon={faHashtag} />
+                  {section.crn}
+                </div>
+                <div>
+                  <FontAwesomeIcon className={css.icon} icon={faSchool} />
+                  {section.campus}
+                </div>
+                <div>
+                  <FontAwesomeIcon className={css.icon} icon={faUserTie} />
+                  {
+                    section.faculty.length === 0 ? 'Unknown' : section.faculty.map(prof => {
+                      const [first, last] = prof.name.split(', ');
+                      return `${last} ${first}`;
+                    }).join(', ')
+                  }
+                </div>
               </div>
-              <div>
-                <FontAwesomeIcon className={css.icon} icon={faBuilding}/>
-                {
-                  section.meetings.length > 0 && section.meetings[0].location.building !== null 
-                  ? section.meetings[0].location.building + ' ' + section.meetings[0].location.room 
-                  : 'None'
-                }
-              </div>
-              <div>
-                <FontAwesomeIcon className={css.icon} icon={faUserTie}/>
-                {
-                  section.faculty.length === 0 ? 'Unknown' : section.faculty.map(prof => {
-                    const [first, last] = prof.name.split(', ');
-                    return `${last} ${first}`;
-                  }).join(', ')
-                }
+              <div className={[css.detailsContainer, css.right].join(' ')}>
+                {section.meetings.map(meeting => <WeeklySchedule className={css.WeeklySchedule} meeting={meeting} />)}
               </div>
             </div>
           }

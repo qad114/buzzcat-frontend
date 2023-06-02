@@ -1,0 +1,33 @@
+.WeeklySchedule {
+  display: flex;
+  font-size: 0.75rem;
+}
+
+.dayBox {
+  text-align: center;
+  width: 1.25em;
+  height: 2.5em;
+  border-top: 1px solid;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dayBox:nth-of-type(1) {
+  border-left: 1px solid;
+}
+
+.dayBox.active {
+  background-color: gray;
+}
+
+.details {
+  font-size: 0.75rem;
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

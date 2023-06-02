@@ -95,10 +95,31 @@
   font-weight: bold;
 }
 
+.details {
+  display: flex;
+}
+
+.details > .left {
+  width: 50%;
+}
+
+.detailsContainer > div {
+  display: flex;
+  align-items: center;
+}
+
 .icon {
   margin-right: 0.2rem;
   width: 2rem;
   height: 0.9rem;
+}
+
+.WeeklySchedule {
+  margin-bottom: 0.5rem;
+}
+
+.WeeklySchedule:last-of-type {
+  margin-bottom: 0;
 }
 
 .prerequisites {
