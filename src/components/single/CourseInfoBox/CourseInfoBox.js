@@ -147,9 +147,7 @@ export default function CourseInfoBox({ className, course, onCrossButtonClick })
 
   return (
     <div className={[css.CourseInfoBox, className].join(' ')}>
-      <button className={css.cross} onClick={onCrossButtonClick}>
-        <FontAwesomeIcon icon={faXmark}/>
-      </button>
+      <FontAwesomeIcon className={css.cross} onClick={onCrossButtonClick} icon={faXmark}/>
       <div className={[css.pane, css.left].join(' ')}>
         {views.map(([name, view], index) =>
           <ListItem
