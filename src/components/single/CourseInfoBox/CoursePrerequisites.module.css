@@ -1,0 +1,25 @@
+.CoursePrerequisites {
+  margin: 2rem;
+}
+
+.prereqListNested.inactive {
+  display: none;
+}
+
+.prereqNode {
+  padding: 0.5em;
+  border-radius: 0.5em;
+  border: 0;
+}
+
+.prereqNode.operator {
+  font-style: italic;
+}
+
+.prereqNode.course {
+  background-color: transparent;
+  padding: 0;
+  font-size: medium;
+  text-decoration: underline;
+  margin-left: 0.5rem;
+}

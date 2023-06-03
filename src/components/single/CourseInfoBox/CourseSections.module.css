@@ -1,0 +1,47 @@
+.ListItem {
+  /*min-height: 4.5rem;*/
+  padding: 1rem;
+  transition: all 0.2s ease;
+  --dark-bg-color: var(--dark-bg-color);
+  --light-bg-color: var(--light-bg-color);
+  --dark-hover-bg-color: var(--dark-btn-hover-bg-color);
+  --light-hover-bg-color: var(--light-btn-hover-bg-color);
+  --dark-tag-bg-color: var(--dark-bg-2);
+  --light-tag-bg-color: var(--light-bg-2);
+  --dark-tag-text-color: gray;
+  --light-tag-text-color: dimgray;
+  --dark-divider-color: var(--dark-btn-divider-color);
+  --light-divider-color: var(--light-btn-divider-color);
+}
+
+.ListItem.active {
+  --dark-bg-color: var(--dark-btn-hover-bg-color);
+  --light-bg-color: var(--light-btn-hover-bg-color);
+}
+
+.ListItem:hover {
+  transition: all 0.2s ease;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+}
+
+.details > .left {
+  width: 50%;
+}
+
+.icon {
+  margin-right: 0.2rem;
+  width: 2rem;
+  height: 0.9rem;
+}
+
+.WeeklySchedule {
+  margin-bottom: 0.5rem;
+}
+
+.WeeklySchedule:last-of-type {
+  margin-bottom: 0;
+}

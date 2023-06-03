@@ -1,0 +1,24 @@
+.CourseOverview {
+  margin: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.CourseOverview > div {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.CourseOverview > div:nth-child(1) {
+  padding-top: 0;
+}
+
+.title {
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+.detailsContainer > div {
+  display: flex;
+  align-items: center;
+}
