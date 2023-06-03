@@ -3,9 +3,7 @@ import css from './App.module.css';
 import { useEffect, useRef, useState } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
 
-//import CheckButton from '../components/reusable/CheckButton/CheckButton';
 import CourseInfoBox from '../components/single/CourseInfoBox/CourseInfoBox';
-//import Footer from '../components/single/Footer/Footer';
 import LoginBox from '../components/single/LoginBox/LoginBox';
 import Navbar from '../components/single/Navbar/Navbar';
 import TextField from '../components/reusable/TextField/TextField';
@@ -111,13 +109,9 @@ export default function App() {
             onCrossButtonClick={() => setCurrentCourse(null)} />
 
         </div>
-        {/*<Footer />*/}
 
         <div className={[css.bgOverlay, loginMode ? css.active : css.inactive].join(' ')} onClick={() => {setLoginMode(false); setCurrentCourse(null);}} />
         <LoginBox className={[css.LoginBox, loginMode ? css.active : css.inactive].join(' ')} />
-        {/*
-          <CourseInfoBox className={[css.CourseInfoBox, currentCourse === null ? css.inactive : css.active].join(' ')} course={currentCourse} />
-        */}
       </div>
     </ThemeContext.Provider>
   );
