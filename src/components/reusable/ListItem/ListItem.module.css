@@ -1,3 +1,7 @@
+.root {
+  position: relative;
+}
+
 :global(.App.dark) .root {
   background-color: var(--dark-bg-color);
   border-bottom: 1px solid var(--dark-divider-color);
@@ -8,12 +12,32 @@
   border-bottom: 1px solid var(--light-divider-color);
 }
 
-:global(.App.dark) .root:hover {
+.root::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: opacity var(--transition-time) ease;
+}
+
+.root:hover::before {
+  opacity: 1;
+  transition: opacity var(--transition-time) ease;
+}
+
+:global(.App.dark) .root::before {
   background-color: var(--dark-hover-bg-color);
 }
 
-:global(.App.light) .root:hover {
+:global(.App.light) .root::before {
   background-color: var(--light-hover-bg-color);
+}
+
+.root > * {
+  position: relative;
 }
 
 .row {

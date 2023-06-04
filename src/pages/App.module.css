@@ -114,9 +114,7 @@
 }
 
 .ListItem {
-  /*min-height: 4.5rem;*/
   padding: 1rem;
-  transition: all 0.2s ease;
   --max-lines: 2;
   --dark-bg-color: var(--dark-bg-4);
   --light-bg-color: var(--light-bg-4);
@@ -135,10 +133,6 @@
   --light-bg-color: var(--light-bg-5);
 }
 
-.ListItem:hover {
-  transition: all 0.2s ease;
-}
-
 .bgOverlay {
   position: absolute;
   top: 0;
@@ -147,12 +141,13 @@
   height: 100%;
   background-color: black;
   opacity: 60%;
-  transition: all 0.2s ease;
+  transition: opacity var(--transition-time) ease;
 }
 
 .bgOverlay.inactive {
   visibility: hidden;
   opacity: 0;
+  transition: opacity var(--transition-time) ease;
 }
 
 .LoginBox {
@@ -164,7 +159,7 @@
   margin: auto;
   width: 60%;
   height: 70%;
-  transition: all 0.2s ease;
+  transition: opacity var(--transition-time) ease;
   --dark-left-pane-bg-color: var(--dark-bg-5);
   --light-left-pane-bg-color: var(--light-bg-5);
   --dark-right-pane-bg-color: var(--dark-bg-4);
@@ -182,13 +177,13 @@
 .LoginBox.inactive {
   visibility: hidden;
   opacity: 0;
+  transition: opacity var(--transition-time) ease;
 }
 
 .CourseInfoBox {
   width: 70%;
   height: 100%;
   margin-left: 1rem;
-  transition: all 0.2s ease;
   overflow-y: scroll;
 
   --dark-left-pane-bg-color: var(--dark-bg-3);

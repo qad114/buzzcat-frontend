@@ -28,7 +28,6 @@
 
 .pane.right {
   width: 75%;
-  /*padding: 2rem;*/
   overflow-x: scroll;
   overflow-y: scroll;
 }
@@ -40,6 +39,7 @@
   border-width: 0;
   border-radius: 0.5rem;
   padding: 0.5rem;
+  z-index: 1;
 }
 
 :global(.App.dark) .cross:hover {
@@ -51,9 +51,7 @@
 }
 
 .ListItem {
-  /*min-height: 4.5rem;*/
   padding: 1rem;
-  transition: all 0.2s ease;
   --dark-bg-color: var(--dark-bg-color);
   --light-bg-color: var(--light-bg-color);
   --dark-hover-bg-color: var(--dark-btn-hover-bg-color);

@@ -1,7 +1,6 @@
 .ListItem {
   /*min-height: 4.5rem;*/
   padding: 1rem;
-  transition: all 0.2s ease;
   --dark-bg-color: var(--dark-bg-color);
   --light-bg-color: var(--light-bg-color);
   --dark-hover-bg-color: var(--dark-btn-hover-bg-color);
@@ -17,10 +16,6 @@
 .ListItem.active {
   --dark-bg-color: var(--dark-btn-hover-bg-color);
   --light-bg-color: var(--light-btn-hover-bg-color);
-}
-
-.ListItem:hover {
-  transition: all 0.2s ease;
 }
 
 .details {
