@@ -1,15 +1,15 @@
-.CourseOverview {
+.root {
   margin: 2rem;
   display: flex;
   flex-direction: column;
 }
 
-.CourseOverview > div {
+.root > div {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
-.CourseOverview > div:nth-child(1) {
+.root > div:nth-child(1) {
   padding-top: 0;
 }
 

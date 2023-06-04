@@ -6,7 +6,7 @@ import WeeklySchedule from "../../reusable/WeeklySchedule/WeeklySchedule";
 
 export default function CourseSections({ className, sections }) {
   return (
-    <div className={css.CourseSections}>
+    <div className={[CourseSections.name, css.root, className].join(' ')}>
       {sections.map((section) => 
         <ListItem
           className={[css.ListItem, css.section].join(' ')}

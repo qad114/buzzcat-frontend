@@ -1,15 +1,15 @@
-.Navbar {
+.root {
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;
   margin: 0px;
 }
 
-:global(.App.dark) .Navbar {
+:global(.App.dark) .root {
   background-color: var(--dark-bg-color);
 }
 
-:global(.App.light) .Navbar {
+:global(.App.light) .root {
   background-color: var(--light-bg-color);
 }
 

@@ -1,18 +1,18 @@
-:global(.App.dark) .ListItem {
+:global(.App.dark) .root {
   background-color: var(--dark-bg-color);
   border-bottom: 1px solid var(--dark-divider-color);
 }
 
-:global(.App.light) .ListItem {
+:global(.App.light) .root {
   background-color: var(--light-bg-color);
   border-bottom: 1px solid var(--light-divider-color);
 }
 
-:global(.App.dark) .ListItem:hover {
+:global(.App.dark) .root:hover {
   background-color: var(--dark-hover-bg-color);
 }
 
-:global(.App.light) .ListItem:hover {
+:global(.App.light) .root:hover {
   background-color: var(--light-hover-bg-color);
 }
 

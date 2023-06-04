@@ -55,7 +55,7 @@ export default function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={['App', css.App, theme].join(' ')}> {/* Global 'App' class allows all components to get the current theme using pure CSS */}
+      <div className={[App.name, css.root, theme].join(' ')}> {/* Global 'App' class allows all components to get the current theme using pure CSS */}
         <Navbar className={css.Navbar} onThemeButtonClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark');}} onLoginButtonClick={() => {setLoginMode(!loginMode);}} />
         <div className={css.body}>
 

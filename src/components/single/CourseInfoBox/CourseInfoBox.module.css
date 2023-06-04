@@ -1,15 +1,15 @@
-.CourseInfoBox {
+.root {
   border-radius: 0.5rem;
   display: flex;
   position: relative;
   display: flex;
 }
 
-:global(.App.dark) .CourseInfoBox {
+:global(.App.dark) .root {
   background-color: var(--dark-right-pane-bg-color);
 }
 
-:global(.App.light) .CourseInfoBox {
+:global(.App.light) .root {
   background-color: var(--light-right-pane-bg-color);
 }
 

@@ -55,7 +55,7 @@ export default function CoursePrerequisites({ className, prereqTree }) {
   }
 
   return (
-    <div className={css.CoursePrerequisites}>
+    <div className={[CoursePrerequisites.name, css.root, className].join(' ')}>
       <ul>
         {prereqsToHTML(prereqTree)}
       </ul>

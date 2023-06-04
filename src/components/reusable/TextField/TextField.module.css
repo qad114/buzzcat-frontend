@@ -1,4 +1,4 @@
-.TextField {
+.root {
   border-radius: 4px;
   padding: 1rem;
   box-sizing: border-box;
@@ -7,23 +7,23 @@
   color: gray;
 }
 
-.TextField:focus {
+.root:focus {
   border: 0;
   outline: none;
 }
 
-:global(.App.dark) .TextField {
+:global(.App.dark) .root {
   background-color: var(--dark-bg-color);
 }
 
-:global(.App.dark) .TextField:hover {
+:global(.App.dark) .root:hover {
   background-color: var(--dark-hover-bg-color);
 }
 
-:global(.App.light) .TextField {
+:global(.App.light) .root {
   background-color: var(--light-bg-color);
 }
 
-:global(.App.light) .TextField:hover {
+:global(.App.light) .root:hover {
   background-color: var(--light-hover-bg-color);
 }

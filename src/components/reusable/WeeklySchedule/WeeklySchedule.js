@@ -8,7 +8,7 @@ export default function WeeklySchedule({ className, meeting }) {
   const [startHrs, startMins] = meeting.time_start === null ? [null, null] : [parseInt(meeting.time_start.substring(0, 2)), meeting.time_start.substring(2, 4)];
   const [endHrs, endMins] = meeting.time_end === null ? [null, null] : [parseInt(meeting.time_end.substring(0, 2)), meeting.time_end.substring(2, 4)];
   return (
-    <div className={[css.WeeklySchedule, className].join(' ')}>
+    <div className={[WeeklySchedule.name, css.root, className].join(' ')}>
       {
         [['sunday', 'S'], ['monday', 'M'], ['tuesday', 'T'], ['wednesday', 'W'], ['thursday', 'T'], ['friday', 'F'], ['saturday', 'S']]
         .map(([day, letter]) =>
