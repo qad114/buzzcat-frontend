@@ -4,14 +4,14 @@ export type Course = {
   title: string,
   description: string,
   credits: CourseCredits,
-  sections: Section[],
+  sections: Section[] | undefined,
   prerequisites: PrereqNode | null
 };
 
 export type CourseCredits = {
   low: number,
-  operator: string,
-  high: number
+  operator: string | null,
+  high: number | null
 };
 
 export type PrereqOperatorNode = {
@@ -54,12 +54,12 @@ export type Professor = {
 
 export type Meeting = {
   days: ('monday' | 'tuesday' | 'wednesday' | 'thursday' | 'friday' | 'saturday' | 'sunday')[]
-  time_start: string,
-  time_end: string
+  time_start: string | null,
+  time_end: string | null,
   location: MeetingLocation
 };
 
 export type MeetingLocation = {
-  building: string,
-  room: string
+  building: string | null,
+  room: string | null
 };
