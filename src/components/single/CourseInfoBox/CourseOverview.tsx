@@ -1,6 +1,7 @@
+import { Course } from '../../../types';
 import css from './CourseOverview.module.css';
 
-export default function CourseOverview({ className, course }) {
+export default function CourseOverview({ className = '', course }: {className?: string, course: Course}) {
   return (
     <div className={[CourseOverview.name, css.root, className].join(' ')}>
       <div className={css.containerTitleDesc}>
@@ -10,7 +11,7 @@ export default function CourseOverview({ className, course }) {
 
       <div className={css.containerGeneralInfo}>
         <div style={{fontWeight: 'bold'}}>General information</div>
-        <div>{`Credits: ${course.credits_max == null ? course.credits_min : course.credits_min + '-' + course.credits_max}`}</div>
+        <div>{`Credits: TODO`}</div>
       </div>
     </div>
   )

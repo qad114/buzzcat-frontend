@@ -1,34 +1,37 @@
+import { PrereqCourseNode, PrereqNode, PrereqOperatorNode, PrereqTestScoreNode } from '../../../types';
 import css from './CoursePrerequisites.module.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
-export default function CoursePrerequisites({ className, prereqTree }) {
-  function getPrereqs(subject, number, callback) {
+export default function CoursePrerequisites({ className = '', prereqTree }: {className?: string, prereqTree: PrereqNode | null}) {
+  if (prereqTree === null) return null;
+
+  function getPrereqs(subject: string, number: string, callback: (root: PrereqNode) => void) {
     fetch(`${BACKEND_URL}/get_course?term=202308&subject=${subject}&number=${number}`)
       .then((res) => res.json())
       .then((res) => callback(res.result === null ? {} : res.result.prerequisites));
   }
 
-  function getTarget(tree, key) {
+  function getTarget(tree: PrereqNode, key: string): PrereqNode {
     let newTree = tree;
     for (let i = 0; i < key.length; i++) {
       const index = parseInt(key.charAt(i));
-      newTree = newTree.children[index];
+      if (newTree.children) newTree = newTree.children[index];
     }
     return newTree;
   }
 
-  function onCourseNodeClick(subject, number, key) {
+  function onCourseNodeClick(subject: string, number: string, key: string) {
     console.log(`clicked ${subject} ${number}`);
     const copyTree = structuredClone(prereqTree);
-    const target = getTarget(copyTree, key);
+    const target: PrereqCourseNode = getTarget(copyTree as PrereqNode, key) as PrereqCourseNode;
     getPrereqs(target.subject, target.number, (res) => {
       target.children = [res];
       //setPrereqTree(copyTree);
     });
   }
 
-  function prereqsToHTML(root, key = '') {
+  function prereqsToHTML(root: PrereqNode, key: string = '') {
     console.log(root);
     if (root.type === 'operator') {
       const text = root.value === 'or' ? 'One or more of:' : 'All of:';
