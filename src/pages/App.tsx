@@ -2,6 +2,7 @@ import css from './App.module.css';
 
 import { useEffect, useRef, useState } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { Course } from '../types';
 
 import CourseInfoBox from '../components/single/CourseInfoBox/CourseInfoBox';
 import LoginBox from '../components/single/LoginBox/LoginBox';
@@ -18,12 +19,12 @@ export default function App() {
 
   const [loginMode, setLoginMode] = useState(false);
 
-  const searchInput = useRef();
-  const creditsMinInput = useRef();
-  const creditsMaxInput = useRef();
-  let textFieldTimer = null;
+  const searchInput = useRef<HTMLInputElement>(null);
+  const creditsMinInput = useRef<HTMLInputElement>(null);
+  const creditsMaxInput = useRef<HTMLInputElement>(null);
+  let textFieldTimer: ReturnType<typeof setTimeout>;
 
-  const rightPane = useRef();
+  const rightPane = useRef<HTMLDivElement>(null);
   const [searchOffset, setSearchOffset] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
 
@@ -31,7 +32,7 @@ export default function App() {
 
   function search(offset = 0, limit = 50, append = false) {
     console.log(`searching from ${offset} to ${offset + limit}`)
-    const url = `${BACKEND_URL}/search?term=202308&query=${searchInput.current.value}&credits_min=${creditsMinInput.current.value}&credits_max=${creditsMaxInput.current.value}&offset=${offset}&limit=${limit}`;
+    const url = `${BACKEND_URL}/search?term=202308&query=${searchInput.current?.value}&credits_min=${creditsMinInput.current?.value}&credits_max=${creditsMaxInput.current?.value}&offset=${offset}&limit=${limit}`;
     fetch(url)
       .then((res) => res.json())
       .then((res) => setSearchResults(append ? searchResults.concat(res.result) : res.result));
@@ -48,7 +49,7 @@ export default function App() {
     }, INPUT_TIMEOUT);
   }
 
-  function onCourseCardClick(index) {
+  function onCourseCardClick(index: number) {
     const course = searchResults[index];
     setCurrentCourse(currentCourse === course ? null : course);
   }
@@ -66,11 +67,11 @@ export default function App() {
             <div className={css.subheading}>Credits</div>
             <div className={css.row}>
               <TextField className={[css.TextField, css.credits, css.start].join(' ')} defaultText={'Min'} inputRef={creditsMinInput} onChange={() => {
-                creditsMinInput.current.value = creditsMinInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
+                if (creditsMinInput.current) creditsMinInput.current.value = creditsMinInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
                 onTextFieldChange();
               }} />
               <TextField className={[css.TextField, css.credits, css.end].join(' ')} defaultText={'Max'} inputRef={creditsMaxInput} onChange={() => {
-                creditsMaxInput.current.value = creditsMaxInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
+                if (creditsMaxInput.current) creditsMaxInput.current.value = creditsMaxInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
                 onTextFieldChange();
               }} />
             </div>
@@ -79,16 +80,18 @@ export default function App() {
 
           <div className={[css.pane, css.right, currentCourse === null ? css.active : css.inactive].join(' ')} ref={rightPane} onScroll={() => {
             // Check if we have scrolled to the bottom
-            const scrollOffset = rightPane.current.scrollHeight - rightPane.current.scrollTop - rightPane.current.clientHeight;
-            console.log(scrollOffset);
-            if (scrollOffset <= 1) {
-              console.log('reached bottom');
-              search(searchOffset + PAGE_SIZE, PAGE_SIZE, true); // TODO: ugly and potentially a race condition, maybe track offset within search()
-              setSearchOffset(searchOffset + PAGE_SIZE);
+            if (rightPane.current) {
+              const scrollOffset = rightPane.current.scrollHeight - rightPane.current.scrollTop - rightPane.current.clientHeight;
+              console.log(scrollOffset);
+              if (scrollOffset <= 1) {
+                console.log('reached bottom');
+                search(searchOffset + PAGE_SIZE, PAGE_SIZE, true); // TODO: ugly and potentially a race condition, maybe track offset within search()
+                setSearchOffset(searchOffset + PAGE_SIZE);
+              }
             }
           }}>
             {/*searchResults.map((entry, index) => <SearchResultCard className={[css.SearchResultCard, currentCourse === entry ? css.active : css.inactive].join(' ')} key={entry.subject + entry.number} result={entry} onClick={() => {onCourseCardClick(index);}} />)*/}
-            {searchResults.map((entry, index) => 
+            {searchResults.map((entry: Course, index: number) => 
               <ListItem 
                 className={[css.ListItem, currentCourse === entry ? css.active : css.inactive].join(' ')}
                 key={entry.subject + ' ' + entry.number}
@@ -103,10 +106,10 @@ export default function App() {
             )}
           </div>
 
-          <CourseInfoBox
+          {currentCourse !== null && <CourseInfoBox
             className={[css.CourseInfoBox, currentCourse === null ? css.inactive : css.active].join(' ')}
             course={currentCourse} 
-            onCrossButtonClick={() => setCurrentCourse(null)} />
+            onCrossButtonClick={() => setCurrentCourse(null)} />}
 
         </div>
 

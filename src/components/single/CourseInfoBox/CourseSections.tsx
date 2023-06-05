@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHashtag, faSchool, faUserTie } from '@fortawesome/free-solid-svg-icons'
 import ListItem from '../../reusable/ListItem/ListItem';
 import WeeklySchedule from "../../reusable/WeeklySchedule/WeeklySchedule";
+import { Section } from '../../../types';
 
-export default function CourseSections({ className, sections }) {
+export default function CourseSections({ className = '', sections }: {className?: string, sections: Section[]}) {
   return (
     <div className={[CourseSections.name, css.root, className].join(' ')}>
       {sections.map((section) => 

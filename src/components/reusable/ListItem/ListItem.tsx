@@ -1,7 +1,7 @@
 import css from './ListItem.module.css';
 
-export default function ListItem({ className, tags, mainText, subText, onClick }) {
-  if (tags === undefined) tags = [];
+export default function ListItem({ className = '', tags = [], mainText, subText, onClick }:
+    {className?: string, tags?: string[], mainText: string, subText?: string | JSX.Element, onClick?: () => void}) {
   return (
     <div className={[ListItem.name, css.root, className].join(' ')} onClick={onClick}>
       <div className={css.row}>

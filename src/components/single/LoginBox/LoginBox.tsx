@@ -1,7 +1,7 @@
 import css from './LoginBox.module.css';
 import TextField from '../../reusable/TextField/TextField'
 
-export default function LoginBox({ className }) {
+export default function LoginBox({ className = '' }: {className?: string}) {
   return (
     <div className={[LoginBox.name, css.root, className].join(' ')}>
       <div className={[css.pane, css.left].join(' ')}>
