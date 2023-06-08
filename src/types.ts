@@ -63,3 +63,8 @@ export type MeetingLocation = {
   building: string | null,
   room: string | null
 };
+
+export type User = {
+  uid: string,
+  displayName: string
+}

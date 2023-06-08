@@ -1,0 +1,120 @@
+.root {
+  width: 85%;
+  height: 90%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  border-radius: 0.5rem;
+  display: flex;
+}
+
+.root.inactive {
+  visibility: hidden;
+  opacity: 0;
+}
+
+:global(.App.dark) .root {
+  background-color: var(--dark-bg-5);
+}
+
+:global(.App.light) .root {
+  background-color: var(--light-bg-5);
+}
+
+.pane {
+  box-sizing: border-box;
+}
+
+.leftContainer {
+  flex: 1 20%;
+  display: flex;
+  flex-direction: column;
+}
+
+.pane.left {
+  flex: 1 auto;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  border-radius: 0.5rem 0 0 0;
+}
+
+.signOut {
+  flex: 0 auto;
+  padding: 1rem;
+  font-weight: bold;
+  border: 0;
+  border-radius: 0 0 0 0.5rem;
+}
+
+:global(.App.dark) .signOut {
+  background-color: var(--dark-bg-4);
+  border-top: 1px solid var(--dark-bg-2);
+}
+
+:global(.App.light) .signOut {
+  background-color: var(--light-bg-4);
+  border-top: 1px solid var(--light-bg-2);
+}
+
+:global(.App.dark) .pane.left {
+  background-color: var(--dark-bg-4);
+}
+
+:global(.App.light) .pane.left {
+  background-color: var(--light-bg-4);
+}
+
+.pane.right {
+  flex: 1 80%;
+}
+
+.profileIcon {
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  line-height: 10rem;
+  font-size: 4rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+:global(.App.dark) .profileIcon {
+  background-color: var(--dark-bg-2);
+}
+
+:global(.App.light) .profileIcon {
+  background-color: var(--light-bg-2);
+}
+
+.displayName {
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: 1.5rem;
+}
+
+:global(.App.dark) .displayName {
+  border-bottom: 1px solid var(--dark-bg-2);
+}
+
+:global(.App.light) .displayName {
+  border-bottom: 1px solid var(--light-bg-2);
+}
+
+.tab {
+  padding: 1rem;
+  --dark-hover-bg-color: var(--dark-bg-5);
+  --light-hover-bg-color: var(--light-bg-5);
+  --dark-tag-bg-color: var(--dark-bg-2);
+  --light-tag-bg-color: var(--light-bg-2);
+  --dark-tag-text-color: gray;
+  --light-tag-text-color: dimgray;
+  --dark-divider-color: var(--dark-bg-2);
+  --light-divider-color: var(--light-bg-2);
+}
