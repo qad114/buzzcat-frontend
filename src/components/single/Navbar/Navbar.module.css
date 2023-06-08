@@ -35,15 +35,22 @@
 }
 
 .items > * {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  /*padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   padding-left: 1rem;
-  padding-right: 1rem;
+  padding-right: 1rem;*/
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-right: 0.5rem;
   border-radius: 0.2rem;
   background-color: transparent;
   border-color: transparent;
-  font-size: medium;
+  font-size: 1.5rem;
   transition: all 0.2s;
+}
+
+.items > *:last-of-type {
+  margin-right: 0;
 }
 
 :global(.App.dark) .items > * {
