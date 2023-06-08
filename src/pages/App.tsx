@@ -2,13 +2,17 @@ import css from './App.module.css';
 
 import { useEffect, useRef, useState } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';
-import { Course } from '../types';
+import { Course, User } from '../types';
 
 import CourseInfoBox from '../components/single/CourseInfoBox/CourseInfoBox';
 import LoginBox from '../components/single/LoginBox/LoginBox';
 import Navbar from '../components/single/Navbar/Navbar';
 import TextField from '../components/reusable/TextField/TextField';
 import ListItem from '../components/reusable/ListItem/ListItem';
+import ProfileBox from '../components/single/ProfileBox/ProfileBox';
+
+import { onEmailSignIn, onEmailSignOut } from '../auth/firebase';
+import { getUser } from '../api/auth';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const INPUT_TIMEOUT = 200;
@@ -22,13 +26,24 @@ export default function App() {
   const searchInput = useRef<HTMLInputElement>(null);
   const creditsMinInput = useRef<HTMLInputElement>(null);
   const creditsMaxInput = useRef<HTMLInputElement>(null);
+  const rightPane = useRef<HTMLDivElement>(null);
+
   let textFieldTimer: ReturnType<typeof setTimeout>;
 
-  const rightPane = useRef<HTMLDivElement>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [searchOffset, setSearchOffset] = useState(0);
   const [searchResults, setSearchResults] = useState([]);
-
   const [currentCourse, setCurrentCourse] = useState(null);
+
+  //onEmailSignIn(user => setUser(user));
+  //onEmailSignOut(() => setUser(null));
+
+  onEmailSignIn(async token => {
+    const user = await getUser(token);
+    setUser(user);
+  })
+
+  onEmailSignOut(() => setUser(null));
 
   function search(offset = 0, limit = 50, append = false) {
     console.log(`searching from ${offset} to ${offset + limit}`)
@@ -57,7 +72,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <div className={[App.name, css.root, theme].join(' ')}> {/* Global 'App' class allows all components to get the current theme using pure CSS */}
-        <Navbar className={css.Navbar} onThemeButtonClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark');}} onLoginButtonClick={() => {setLoginMode(!loginMode);}} />
+        <Navbar className={css.Navbar} user={user} onThemeButtonClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark');}} onLoginButtonClick={() => {setLoginMode(!loginMode);}} />
         <div className={css.body}>
 
           <div className={[css.pane, css.left, currentCourse === null ? css.active : css.inactive].join(' ')}>
@@ -114,7 +129,7 @@ export default function App() {
         </div>
 
         <div className={[css.bgOverlay, loginMode ? css.active : css.inactive].join(' ')} onClick={() => {setLoginMode(false); setCurrentCourse(null);}} />
-        <LoginBox className={[css.LoginBox, loginMode ? css.active : css.inactive].join(' ')} />
+        {user ? <ProfileBox user={user} active={loginMode} /> : <LoginBox className={[css.LoginBox, loginMode ? css.active : css.inactive].join(' ')} />}
       </div>
     </ThemeContext.Provider>
   );

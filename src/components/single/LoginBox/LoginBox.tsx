@@ -1,7 +1,19 @@
 import css from './LoginBox.module.css';
-import TextField from '../../reusable/TextField/TextField'
+import TextField from '../../reusable/TextField/TextField';
+
+import { emailSignIn } from '../../../auth/firebase';
+import { useRef } from 'react';
 
 export default function LoginBox({ className = '' }: {className?: string}) {
+  const emailField = useRef<HTMLInputElement>(null);
+  const passwordField = useRef<HTMLInputElement>(null);
+
+  function onSignInButtonClick() {
+    if (emailField.current && passwordField.current) {
+      emailSignIn(emailField.current.value, passwordField.current.value);
+    }
+  }
+
   return (
     <div className={[LoginBox.name, css.root, className].join(' ')}>
       <div className={[css.pane, css.left].join(' ')}>
@@ -19,9 +31,9 @@ export default function LoginBox({ className = '' }: {className?: string}) {
       </div>
       <div className={[css.pane, css.right].join(' ')}>
         <div className={css.login}>
-          <TextField className={css.email} defaultText={'Email address'} />
-          <TextField className={css.password} defaultText={'Password'} isPassword={true} />
-          <button className={css.submit}>Login</button>
+          <TextField className={css.email} inputRef={emailField} defaultText={'Email address'} />
+          <TextField className={css.password} inputRef={passwordField} defaultText={'Password'} isPassword={true} />
+          <button className={css.submit} onClick={onSignInButtonClick} >Sign in</button>
         </div>
       </div>
     </div>
