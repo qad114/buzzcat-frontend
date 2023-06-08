@@ -35,8 +35,16 @@ export default function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [currentCourse, setCurrentCourse] = useState(null);
 
-  //onEmailSignIn(user => setUser(user));
-  //onEmailSignOut(() => setUser(null));
+  onEmailSignIn(async token => {
+    console.log('sign in');
+    const user = await getUser(token);
+    setUser(user);
+  })
+
+  onEmailSignOut(() => {
+    console.log('sign out');
+    setUser(null);
+  });
 
   onEmailSignIn(async token => {
     const user = await getUser(token);
