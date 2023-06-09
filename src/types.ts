@@ -66,5 +66,13 @@ export type MeetingLocation = {
 
 export type User = {
   uid: string,
-  displayName: string
+  displayName: string,
+  courseHistory: HistoricCourse[]
 }
+
+export type HistoricCourse = {
+  subject: string,
+  number: string,
+  level: string,
+  grade: string
+};

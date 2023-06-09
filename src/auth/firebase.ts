@@ -1,5 +1,5 @@
 import { initializeApp } from 'firebase/app';
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, User as FirebaseUser } from 'firebase/auth';
 
 export const app = initializeApp({
   apiKey: "AIzaSyA8ADGi_FmSnkS9diL0ByiiuCVizE9ZKyk",
@@ -24,10 +24,12 @@ export const emailSignUp = async (email: string, password: string) => {
   await createUserWithEmailAndPassword(auth, email, password);
 }
 
-let emailSignInListeners: ((token: string) => void)[] = []
+let fbUser: FirebaseUser | null = null;
+
+let emailSignInListeners: ((user: FirebaseUser) => void)[] = []
 let emailSignOutListeners: (() => void)[] = []
 
-export const onEmailSignIn = (listener: (token: string) => void) => {
+export const onEmailSignIn = (listener: (user: FirebaseUser) => void) => {
   emailSignInListeners.push(listener);
 };
 
@@ -36,9 +38,14 @@ export const onEmailSignOut = (listener: () => void) => {
 };
 
 onAuthStateChanged(auth, async user => {
+  fbUser = user;
   if (user) {
-    for (const listener of emailSignInListeners) listener(await user.getIdToken());
+    for (const listener of emailSignInListeners) listener(user);
   } else {
     for (const listener of emailSignOutListeners) listener();
   }
 });
+
+export const getToken = async () => {
+  if (fbUser) return await fbUser.getIdToken();
+}

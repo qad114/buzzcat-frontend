@@ -11,9 +11,10 @@ import TextField from '../components/reusable/TextField/TextField';
 import ListItem from '../components/reusable/ListItem/ListItem';
 import ProfileBox from '../components/single/ProfileBox/ProfileBox';
 
-import { onEmailSignIn, onEmailSignOut } from '../auth/firebase';
+import { getToken, onEmailSignIn, onEmailSignOut } from '../auth/firebase';
 import { getUser } from '../api/auth';
 import { searchCourses } from '../api/courses';
+import { UserContext } from '../contexts/UserContext';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const INPUT_TIMEOUT = 200;
@@ -36,8 +37,8 @@ export default function App() {
   const [searchResults, setSearchResults] = useState<Course[]>([]);
   const [currentCourse, setCurrentCourse] = useState<Course | null>(null);
 
-  onEmailSignIn(async token => {
-    const user = await getUser(token);
+  onEmailSignIn(async fbUser => {
+    const user = await getUser(await getToken() as string);
     setUser(user);
   })
 
@@ -74,65 +75,67 @@ export default function App() {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className={[App.name, css.root, theme].join(' ')}> {/* Global 'App' class allows all components to get the current theme using pure CSS */}
-        <Navbar user={user} onThemeButtonClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark');}} onLoginButtonClick={() => {setLoginMode(!loginMode);}} />
-        <div className={css.body}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <div className={[App.name, css.root, theme].join(' ')}> {/* Global 'App' class allows all components to get the current theme using pure CSS */}
+          <Navbar onThemeButtonClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark');}} onLoginButtonClick={() => {setLoginMode(!loginMode);}} />
+          <div className={css.body}>
 
-          <div className={[css.pane, css.left, currentCourse === null ? css.active : css.inactive].join(' ')}>
+            <div className={[css.pane, css.left, currentCourse === null ? css.active : css.inactive].join(' ')}>
 
-            <TextField className={[css.TextField, css.search].join(' ')} defaultText={'Search...'} inputRef={searchInput} onChange={onTextFieldChange} />
-            
-            <div className={css.subheading}>Credits</div>
-            <div className={css.row}>
-              <TextField className={[css.TextField, css.credits, css.start].join(' ')} defaultText={'Min'} inputRef={creditsMinInput} onChange={() => {
-                if (creditsMinInput.current) creditsMinInput.current.value = creditsMinInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
-                onTextFieldChange();
-              }} />
-              <TextField className={[css.TextField, css.credits, css.end].join(' ')} defaultText={'Max'} inputRef={creditsMaxInput} onChange={() => {
-                if (creditsMaxInput.current) creditsMaxInput.current.value = creditsMaxInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
-                onTextFieldChange();
-              }} />
+              <TextField className={[css.TextField, css.search].join(' ')} defaultText={'Search...'} inputRef={searchInput} onChange={onTextFieldChange} />
+              
+              <div className={css.subheading}>Credits</div>
+              <div className={css.row}>
+                <TextField className={[css.TextField, css.credits, css.start].join(' ')} defaultText={'Min'} inputRef={creditsMinInput} onChange={() => {
+                  if (creditsMinInput.current) creditsMinInput.current.value = creditsMinInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
+                  onTextFieldChange();
+                }} />
+                <TextField className={[css.TextField, css.credits, css.end].join(' ')} defaultText={'Max'} inputRef={creditsMaxInput} onChange={() => {
+                  if (creditsMaxInput.current) creditsMaxInput.current.value = creditsMaxInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
+                  onTextFieldChange();
+                }} />
+              </div>
+
             </div>
 
-          </div>
-
-          <div className={[css.pane, css.right, currentCourse === null ? css.active : css.inactive].join(' ')} ref={rightPane} onScroll={() => {
-            // Check if we have scrolled to the bottom
-            if (rightPane.current) {
-              const scrollOffset = rightPane.current.scrollHeight - rightPane.current.scrollTop - rightPane.current.clientHeight;
-              console.log(scrollOffset);
-              if (scrollOffset <= 1) {
-                console.log('reached bottom');
-                search(searchOffset + PAGE_SIZE, PAGE_SIZE, true); // TODO: ugly and potentially a race condition, maybe track offset within search()
-                setSearchOffset(searchOffset + PAGE_SIZE);
+            <div className={[css.pane, css.right, currentCourse === null ? css.active : css.inactive].join(' ')} ref={rightPane} onScroll={() => {
+              // Check if we have scrolled to the bottom
+              if (rightPane.current) {
+                const scrollOffset = rightPane.current.scrollHeight - rightPane.current.scrollTop - rightPane.current.clientHeight;
+                console.log(scrollOffset);
+                if (scrollOffset <= 1) {
+                  console.log('reached bottom');
+                  search(searchOffset + PAGE_SIZE, PAGE_SIZE, true); // TODO: ugly and potentially a race condition, maybe track offset within search()
+                  setSearchOffset(searchOffset + PAGE_SIZE);
+                }
               }
-            }
-          }}>
-            {/*searchResults.map((entry, index) => <SearchResultCard className={[css.SearchResultCard, currentCourse === entry ? css.active : css.inactive].join(' ')} key={entry.subject + entry.number} result={entry} onClick={() => {onCourseCardClick(index);}} />)*/}
-            {searchResults.map((entry: Course, index: number) => 
-              <ListItem 
-                className={[css.ListItem, currentCourse === entry ? css.active : css.inactive].join(' ')}
-                key={entry.subject + ' ' + entry.number}
-                tags={[
-                  entry.subject + ' ' + entry.number,
-                  entry.credits.operator === null ? `${entry.credits.low} credit${entry.credits.low === 1 ? '' : 's'}` : `${entry.credits.low} ${entry.credits.operator.toLowerCase()} ${entry.credits.high} credits`
-                ]}
-                mainText={entry.title}
-                subText={entry.description}
-                onClick={() => onCourseCardClick(index)}
-              />
-            )}
+            }}>
+              {/*searchResults.map((entry, index) => <SearchResultCard className={[css.SearchResultCard, currentCourse === entry ? css.active : css.inactive].join(' ')} key={entry.subject + entry.number} result={entry} onClick={() => {onCourseCardClick(index);}} />)*/}
+              {searchResults.map((entry: Course, index: number) => 
+                <ListItem 
+                  className={[css.ListItem, currentCourse === entry ? css.active : css.inactive].join(' ')}
+                  key={entry.subject + ' ' + entry.number}
+                  tags={[
+                    entry.subject + ' ' + entry.number,
+                    entry.credits.operator === null ? `${entry.credits.low} credit${entry.credits.low === 1 ? '' : 's'}` : `${entry.credits.low} ${entry.credits.operator.toLowerCase()} ${entry.credits.high} credits`
+                  ]}
+                  mainText={entry.title}
+                  subText={entry.description}
+                  onClick={() => onCourseCardClick(index)}
+                />
+              )}
+            </div>
+
+            {currentCourse !== null && <CourseInfoBox
+              course={currentCourse} 
+              onCrossButtonClick={() => setCurrentCourse(null)} />}
+
           </div>
 
-          {currentCourse !== null && <CourseInfoBox
-            course={currentCourse} 
-            onCrossButtonClick={() => setCurrentCourse(null)} />}
-
+          <div className={[css.bgOverlay, loginMode ? css.active : css.inactive].join(' ')} onClick={() => setLoginMode(false)} />
+          {user ? <ProfileBox active={loginMode} /> : <LoginBox active={loginMode} />}
         </div>
-
-        <div className={[css.bgOverlay, loginMode ? css.active : css.inactive].join(' ')} onClick={() => setLoginMode(false)} />
-        {user ? <ProfileBox user={user} active={loginMode} /> : <LoginBox active={loginMode} />}
-      </div>
+      </UserContext.Provider>
     </ThemeContext.Provider>
   );
 }

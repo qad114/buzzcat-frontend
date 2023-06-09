@@ -1,14 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { addToCourseHistory } from '../../../api/courseHistory';
+import { getToken } from '../../../auth/firebase';
+import { UserContext } from '../../../contexts/UserContext';
 import ToggleSwitch from '../../reusable/ToggleSwitch/ToggleSwitch';
 import css from './CourseHistory.module.scss';
 
 export default function CourseHistory({ className = '' }: {className?: string}) {
+  const { user } = useContext(UserContext);
   const [enabled, setEnabled] = useState(false);
-  const [rows, setRows] = useState<string[][]>([
-    ['CS', '1301', 'Undergraduate', 'P'],
-    ['CS', '1311', 'Undergraduate', 'A'],
-    ['MATH', '1554', 'Undergraduate', 'A']
-  ]);
 
   return (
     <div className={[CourseHistory.name, css.root, className].join(' ')}>
@@ -18,7 +17,12 @@ export default function CourseHistory({ className = '' }: {className?: string}) 
           <tr>{['Subject', 'Number', 'Level', 'Grade'].map(s => <th>{s}</th>)}</tr>
         </thead>
         <tbody>
-          {rows.map(row => <tr>{row.map(s => <td>{s}</td>)}</tr>)}
+          {user?.courseHistory.map(course => <tr>
+            <td>{course.subject}</td>
+            <td>{course.number}</td>
+            <td>{course.level}</td>
+            <td>{course.grade}</td>
+          </tr>)}
         </tbody>
       </table> : null}
     </div>

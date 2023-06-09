@@ -1,5 +1,7 @@
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+
 export async function getUser(token: string) {
-  const response = await fetch('http://localhost:3001/auth/user', {
+  const response = await fetch(`${BACKEND_URL}/auth/user`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`
