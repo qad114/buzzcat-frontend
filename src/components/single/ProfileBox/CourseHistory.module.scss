@@ -12,19 +12,30 @@
 
   th, td {
     padding: 0.75rem;
-    border-bottom: 1px solid var(--dark-bg-2);
-    border-right: 1px solid var(--dark-bg-2);
 
-    &:nth-of-type(1) {
-      border-left: 1px solid var(--dark-bg-2);
+    :global(.dark) & {
+      border-bottom: 1px solid var(--dark-bg-2);
+      border-right: 1px solid var(--dark-bg-2);
+      &:nth-of-type(1) { border-left: 1px solid var(--dark-bg-2); }
+    }
+
+    :global(.light) & {
+      border-bottom: 1px solid var(--light-bg-2);
+      border-right: 1px solid var(--light-bg-2);
+      &:nth-of-type(1) { border-left: 1px solid var(--light-bg-2); }
     }
   }  
 
   thead > tr > th {
-    border-top: 1px solid var(--dark-bg-2);
+    :global(.dark) & {
+      background-color: var(--dark-bg-3);
+      border-top: 1px solid var(--dark-bg-2);
+    }
 
-    :global(.dark) & { background-color: var(--dark-bg-3); }
-    :global(.light) & { background-color: var(--light-bg-3); }
+    :global(.light) & {
+      background-color: var(--light-bg-3);
+      border-top: 1px solid var(--light-bg-2);
+    }
 
     &:first-of-type { border-radius: var(--border-radius) 0 0 0; }
     &:last-of-type { border-radius: 0 var(--border-radius) 0 0; }
