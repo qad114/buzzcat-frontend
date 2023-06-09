@@ -6,33 +6,23 @@
   border-radius: 0.5rem;
   position: relative;
   display: flex;
-}
 
-.root.inactive {
-  visibility: hidden;
-  width: 0;
-  margin: 0;
-}
+  :global(.dark) & { background-color: var(--dark-bg-4); }
+  :global(.light) & { background-color: var(--light-bg-4); }
 
-:global(.App.dark) .root {
-  background-color: var(--dark-bg-4);
-}
-
-:global(.App.light) .root {
-  background-color: var(--light-bg-4);
+  &.inactive {
+    visibility: hidden;
+    width: 0;
+    margin: 0;
+  }
 }
 
 .pane.left {
   width: 25%;
   overflow-y: scroll;
-}
 
-:global(.App.dark) .pane.left {
-  background-color: var(--dark-bg-3);
-}
-
-:global(.App.light) .pane.left {
-  background-color: var(--light-bg-3);
+  :global(.dark) & { background-color: var(--dark-bg-3); }
+  :global(.light) & { background-color: var(--light-bg-3); }
 }
 
 .pane.right {
@@ -49,14 +39,11 @@
   border-radius: 0.5rem;
   padding: 0.5rem;
   z-index: 1;
-}
 
-:global(.App.dark) .cross:hover {
-  background-color: var(--dark-bg-3);
-}
-
-:global(.App.light) .cross:hover {
-  background-color: var(--light-bg-3);
+  &:hover {
+    :global(.dark) & { background-color: var(--dark-bg-3); }
+    :global(.light) & { background-color: var(--light-bg-3); }
+  }
 }
 
 .ListItem {

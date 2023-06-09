@@ -1,5 +1,5 @@
 import { Meeting } from '../../../types';
-import css from './WeeklySchedule.module.css';
+import css from './WeeklySchedule.module.scss';
 
 export default function WeeklySchedule({ className, meeting }: {className: string, meeting: Meeting}) {
   const dayBools: {

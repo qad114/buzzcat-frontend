@@ -1,5 +1,5 @@
 import { Course } from '../../../types';
-import css from './CourseOverview.module.css';
+import css from './CourseOverview.module.scss';
 
 export default function CourseOverview({ className = '', course }: {className?: string, course: Course}) {
   return (

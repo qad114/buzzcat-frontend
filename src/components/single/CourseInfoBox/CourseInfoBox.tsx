@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
 import ListItem from '../../reusable/ListItem/ListItem'
-import css from './CourseInfoBox.module.css';
+import css from './CourseInfoBox.module.scss';
 import CourseOverview from './CourseOverview';
 import CourseSections from './CourseSections';
 import CoursePrerequisites from './CoursePrerequisites';

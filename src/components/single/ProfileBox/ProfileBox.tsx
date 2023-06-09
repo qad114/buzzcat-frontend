@@ -1,7 +1,7 @@
 import { User } from '../../../types';
 import { emailSignOut } from '../../../auth/firebase';
 import ListItem from '../../reusable/ListItem/ListItem';
-import css from './ProfileBox.module.css';
+import css from './ProfileBox.module.scss';
 
 export default function ProfileBox({ className = '', user, active }: {className?: string, user: User, active: boolean}) {
   return (

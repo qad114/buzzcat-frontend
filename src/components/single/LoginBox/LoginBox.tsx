@@ -1,4 +1,4 @@
-import css from './LoginBox.module.css';
+import css from './LoginBox.module.scss';
 import TextField from '../../reusable/TextField/TextField';
 
 import { emailSignIn } from '../../../auth/firebase';
