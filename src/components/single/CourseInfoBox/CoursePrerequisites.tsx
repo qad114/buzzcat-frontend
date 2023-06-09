@@ -1,3 +1,4 @@
+import { getCourse } from '../../../api/courses';
 import { PrereqCourseNode, PrereqNode, PrereqOperatorNode, PrereqTestScoreNode } from '../../../types';
 import css from './CoursePrerequisites.module.css';
 
@@ -6,10 +7,13 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 export default function CoursePrerequisites({ className = '', prereqTree }: {className?: string, prereqTree: PrereqNode | null}) {
   if (prereqTree === null) return null;
 
-  function getPrereqs(subject: string, number: string, callback: (root: PrereqNode) => void) {
-    fetch(`${BACKEND_URL}/get_course?term=202308&subject=${subject}&number=${number}`)
-      .then((res) => res.json())
-      .then((res) => callback(res.result === null ? {} : res.result.prerequisites));
+  async function getPrereqs(subject: string, number: string, callback: (root: PrereqNode | {}) => void) {
+    const course = await getCourse({
+      subject: subject,
+      number: number
+    });
+    const prereqs = course.prerequisites || {};
+    callback(prereqs);
   }
 
   function getTarget(tree: PrereqNode, key: string): PrereqNode {
@@ -26,7 +30,7 @@ export default function CoursePrerequisites({ className = '', prereqTree }: {cla
     const copyTree = structuredClone(prereqTree);
     const target: PrereqCourseNode = getTarget(copyTree as PrereqNode, key) as PrereqCourseNode;
     getPrereqs(target.subject, target.number, (res) => {
-      target.children = [res];
+      target.children = [res as PrereqNode];
       //setPrereqTree(copyTree);
     });
   }

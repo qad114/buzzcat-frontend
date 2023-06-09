@@ -13,6 +13,7 @@ import ProfileBox from '../components/single/ProfileBox/ProfileBox';
 
 import { onEmailSignIn, onEmailSignOut } from '../auth/firebase';
 import { getUser } from '../api/auth';
+import { searchCourses } from '../api/courses';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const INPUT_TIMEOUT = 200;
@@ -32,8 +33,8 @@ export default function App() {
 
   const [user, setUser] = useState<User | null>(null);
   const [searchOffset, setSearchOffset] = useState(0);
-  const [searchResults, setSearchResults] = useState([]);
-  const [currentCourse, setCurrentCourse] = useState(null);
+  const [searchResults, setSearchResults] = useState<Course[]>([]);
+  const [currentCourse, setCurrentCourse] = useState<Course | null>(null);
 
   onEmailSignIn(async token => {
     console.log('sign in');
@@ -53,16 +54,21 @@ export default function App() {
 
   onEmailSignOut(() => setUser(null));
 
-  function search(offset = 0, limit = 50, append = false) {
+  async function search(offset = 0, limit = 50, append = false) {
     console.log(`searching from ${offset} to ${offset + limit}`)
-    const url = `${BACKEND_URL}/search?term=202308&query=${searchInput.current?.value}&credits_min=${creditsMinInput.current?.value}&credits_max=${creditsMaxInput.current?.value}&offset=${offset}&limit=${limit}`;
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => setSearchResults(append ? searchResults.concat(res.result) : res.result));
+    const res = await searchCourses({
+      term: '202308',
+      query: searchInput.current?.value || '',
+      creditsLow: creditsMinInput.current?.value,
+      creditsHigh: creditsMaxInput.current?.value,
+      offset: offset,
+      limit: limit
+    });
+    setSearchResults(append ? searchResults.concat(res) : res);
   }
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(search, []) // populate results in the beginning
+  useEffect(() => {search();}, []) // populate results in the beginning
  
   function onTextFieldChange() {
     clearTimeout(textFieldTimer);
