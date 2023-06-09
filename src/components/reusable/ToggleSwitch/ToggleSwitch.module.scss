@@ -1,0 +1,60 @@
+.root {
+  --dark-bg-color: var(--dark-bg-3);
+  --light-bg-color: var(--light-bg-3);
+  --dark-handle-color: var(--dark-bg-0);
+  --light-handle-color: var(--light-bg-0);
+  --dark-handle-active-color: #0B5335;
+  --light-handle-active-color: #7BF4C1;
+}
+
+.root {
+  display: flex;
+  align-items: center;
+}
+
+.switch {
+  width: 5rem;
+  height: 2rem;
+  padding: 0.25rem;
+  margin-right: 0.75rem;
+  border-radius: 0.5rem;
+  
+  :global(.dark) & { background-color: var(--dark-bg-color); }
+  :global(.light) & { background-color: var(--light-bg-color); }
+}
+
+.handle {
+  width: 50%;
+  height: 100%;
+  transition: translate var(--transition-time) ease;
+  border-radius: 0.3rem;
+  position: relative;
+
+  :global(.dark) & { background-color: var(--dark-handle-color); }
+  :global(.light) & { background-color: var(--light-handle-color); }
+
+  &::before {
+    content: '';
+    opacity: 0;
+    position: absolute;
+    border-radius: 0.3rem;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transition: opacity var(--transition-time) ease;
+
+    :global(.dark) & { background-color: var(--dark-handle-active-color); }
+    :global(.light) & { background-color: var(--light-handle-active-color); }
+  }
+
+  &.active {
+    translate: 100%;
+    &::before { opacity: 1; }
+  }
+}
+
+.label {
+  font-weight: bold;
+}

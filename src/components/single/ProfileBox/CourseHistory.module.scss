@@ -1,0 +1,48 @@
+.root {
+  --border-radius: 0.5rem;
+
+  padding: 2rem;
+
+  // TODO: This whole section is atrocious
+  > table {
+    width: 100%;
+    border-radius: var(--border-radius);
+    border-spacing: 0px;
+  }
+
+  th, td {
+    padding: 0.75rem;
+    border-bottom: 1px solid var(--dark-bg-2);
+    border-right: 1px solid var(--dark-bg-2);
+
+    &:nth-of-type(1) {
+      border-left: 1px solid var(--dark-bg-2);
+    }
+  }  
+
+  thead > tr > th {
+    border-top: 1px solid var(--dark-bg-2);
+
+    :global(.dark) & { background-color: var(--dark-bg-3); }
+    :global(.light) & { background-color: var(--light-bg-3); }
+
+    &:first-of-type { border-radius: var(--border-radius) 0 0 0; }
+    &:last-of-type { border-radius: 0 var(--border-radius) 0 0; }
+  }
+
+  tbody > tr {
+    > td {
+      :global(.dark) & { background-color: var(--dark-bg-4); }
+      :global(.light) & { background-color: var(--light-bg-4); }
+    }
+
+    &:last-of-type > td {
+      &:first-of-type { border-radius: 0 0 0 var(--border-radius); }
+      &:last-of-type { border-radius: 0 0 var(--border-radius) 0; }
+    }
+  }
+}
+
+.switch {
+  margin-bottom: 1rem;
+}
