@@ -4,7 +4,7 @@ import TextField from '../../reusable/TextField/TextField';
 import { emailSignIn } from '../../../auth/firebase';
 import { useRef } from 'react';
 
-export default function LoginBox({ className = '' }: {className?: string}) {
+export default function LoginBox({ className = '', active }: {className?: string, active: boolean}) {
   const emailField = useRef<HTMLInputElement>(null);
   const passwordField = useRef<HTMLInputElement>(null);
 
@@ -15,7 +15,7 @@ export default function LoginBox({ className = '' }: {className?: string}) {
   }
 
   return (
-    <div className={[LoginBox.name, css.root, className].join(' ')}>
+    <div className={[LoginBox.name, css.root, active ? css.active : css.inactive, className].join(' ')}>
       <div className={[css.pane, css.left].join(' ')}>
         <img style={{width: '35%', marginBottom: '1em'}} src="https://www.kindpng.com/picc/b/30-305993_buzz-png.png" alt="Buzz Georgia Tech Logo Clipart , Png Download - Buzz Georgia Tech Png, Transparent Png@kindpng.com"/>
         <div className={css.loginBenefits}>

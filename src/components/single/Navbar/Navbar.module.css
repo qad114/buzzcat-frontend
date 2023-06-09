@@ -6,11 +6,11 @@
 }
 
 :global(.App.dark) .root {
-  background-color: var(--dark-bg-color);
+  background-color: var(--dark-bg-0);
 }
 
 :global(.App.light) .root {
-  background-color: var(--light-bg-color);
+  background-color: var(--light-bg-0);
 }
 
 .heading {
@@ -53,18 +53,10 @@
   margin-right: 0;
 }
 
-:global(.App.dark) .items > * {
-  background-color: var(--dark-item-bg-color);
-}
-
-:global(.App.light) .items > * {
-  background-color: var(--light-item-bg-color);
-}
-
 :global(.App.dark) .items > *:hover {
-  background-color: var(--dark-item-hover-bg-color);
+  background-color: var(--dark-bg-1);
 }
   
 :global(.App.light) .items > *:hover {
-  background-color: var(--light-item-hover-bg-color);
+  background-color: var(--light-bg-1);
 }

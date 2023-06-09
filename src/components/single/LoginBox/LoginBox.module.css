@@ -1,4 +1,22 @@
 .root {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 60%;
+  height: 70%;
+  transition: opacity var(--transition-time) ease;
+}
+
+.root.inactive {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--transition-time) ease;
+}
+
+.root {
   border-radius: 0.5rem;
   display: flex;
 }
@@ -14,11 +32,11 @@
 }
 
 :global(.App.dark) .pane.left {
-  background-color: var(--dark-left-pane-bg-color);
+  background-color: var(--dark-bg-5);
 }
 
 :global(.App.light) .pane.left {
-  background-color: var(--light-left-pane-bg-color);
+  background-color: var(--light-bg-5);
 }
 
 .pane.right {
@@ -32,11 +50,11 @@
 }
 
 :global(.App.dark) .pane.right {
-  background-color: var(--dark-right-pane-bg-color);
+  background-color: var(--dark-bg-4);
 }
 
 :global(.App.light) .pane.right {
-  background-color: var(--light-right-pane-bg-color);
+  background-color: var(--light-bg-4);
 }
 
 .loginBenefits {
@@ -86,10 +104,10 @@
 }*/
 
 .email, .password {
-  --dark-bg-color: var(--dark-text-field-bg-color);
-  --light-bg-color: var(--light-text-field-bg-color);
-  --dark-hover-bg-color: var(--dark-text-field-hover-bg-color);
-  --light-hover-bg-color: var(--light-text-field-hover-bg-color);
+  --dark-bg-color: var(--dark-bg-1);
+  --light-bg-color: var(--light-bg-1);
+  --dark-hover-bg-color: var(--dark-bg-2);
+  --light-hover-bg-color: var(--light-bg-2);
 }
 
 
@@ -99,7 +117,6 @@
   border: 0;
   outline: none;
   color: gray;
-  background-color: #16351B;
   padding: 0.6rem;
   font-size: smaller;
   box-sizing: border-box;
@@ -107,13 +124,11 @@
 }
 
 :global(.App.dark) .submit {
-  color: var(--dark-submit-btn-text-color);
-  background-color: var(--dark-submit-btn-bg-color);
+  background-color: #0B492F;
 }
 
 :global(.App.light) .submit {
-  color: var(--light-submit-btn-text-color);
-  background-color: var(--light-submit-btn-bg-color);
+  background-color: #77E4B6;
 }
 
 .submit:hover {
@@ -121,9 +136,9 @@
 }
 
 :global(.App.dark) .submit:hover {
-  background-color: var(--dark-submit-btn-hover-bg-color);
+  background-color: #0B5335;
 }
 
 :global(.App.light) .submit:hover {
-  background-color: var(--light-submit-btn-hover-bg-color);
+  background-color: #7BF4C1;
 }

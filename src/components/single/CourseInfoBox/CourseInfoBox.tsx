@@ -34,7 +34,7 @@ export default function CourseInfoBox({ className = '', course, onCrossButtonCli
   ]
 
   return (
-    <div className={[CourseInfoBox.name, css.root, className].join(' ')}>
+    <div className={[CourseInfoBox.name, css.root, course === null ? css.inactive : css.active, className].join(' ')}>
       <FontAwesomeIcon className={css.cross} onClick={onCrossButtonClick} icon={faXmark}/>
       <div className={[css.pane, css.left].join(' ')}>
         {views.map(([name, view], index) =>

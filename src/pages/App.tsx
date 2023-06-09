@@ -75,7 +75,7 @@ export default function App() {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <div className={[App.name, css.root, theme].join(' ')}> {/* Global 'App' class allows all components to get the current theme using pure CSS */}
-        <Navbar className={css.Navbar} user={user} onThemeButtonClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark');}} onLoginButtonClick={() => {setLoginMode(!loginMode);}} />
+        <Navbar user={user} onThemeButtonClick={() => {setTheme(theme === 'dark' ? 'light' : 'dark');}} onLoginButtonClick={() => {setLoginMode(!loginMode);}} />
         <div className={css.body}>
 
           <div className={[css.pane, css.left, currentCourse === null ? css.active : css.inactive].join(' ')}>
@@ -125,14 +125,13 @@ export default function App() {
           </div>
 
           {currentCourse !== null && <CourseInfoBox
-            className={[css.CourseInfoBox, currentCourse === null ? css.inactive : css.active].join(' ')}
             course={currentCourse} 
             onCrossButtonClick={() => setCurrentCourse(null)} />}
 
         </div>
 
-        <div className={[css.bgOverlay, loginMode ? css.active : css.inactive].join(' ')} onClick={() => {setLoginMode(false); setCurrentCourse(null);}} />
-        {user ? <ProfileBox user={user} active={loginMode} /> : <LoginBox className={[css.LoginBox, loginMode ? css.active : css.inactive].join(' ')} />}
+        <div className={[css.bgOverlay, loginMode ? css.active : css.inactive].join(' ')} onClick={() => setLoginMode(false)} />
+        {user ? <ProfileBox user={user} active={loginMode} /> : <LoginBox active={loginMode} />}
       </div>
     </ThemeContext.Provider>
   );
