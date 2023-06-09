@@ -1,4 +1,4 @@
-import css from './Navbar.module.css';
+import css from './Navbar.module.scss';
 import { User } from '../../../types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBrush, faRightToBracket, faUser } from '@fortawesome/free-solid-svg-icons'

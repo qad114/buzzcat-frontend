@@ -10,10 +10,10 @@
   padding: 0.5em;
   border-radius: 0.5em;
   border: 0;
-}
 
-.prereqNode.operator {
-  font-style: italic;
+  &.operator {
+    font-style: italic;
+  }
 }
 
 .prereqNode.course {

@@ -13,19 +13,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
 
-.dayBox:first-of-type {
-  border-left: 1px solid;
-  border-radius: 4px 0 0 4px;
-}
+  &:first-of-type {
+    border-left: 1px solid;
+    border-radius: 4px 0 0 4px;
+  }
 
-.dayBox:nth-last-of-type(2) {
-  border-radius: 0 4px 4px 0;
-}
+  &:nth-last-of-type(2) {
+    border-radius: 0 4px 4px 0;
+  }
 
-.dayBox.active {
-  background-color: gray;
+  &.active {
+    background-color: gray;
+  }
 }
 
 .details {

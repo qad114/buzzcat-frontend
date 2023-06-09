@@ -1,0 +1,122 @@
+.root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  flex: auto;
+  display: flex;
+  overflow: auto;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  :global(.dark) & { background-color: var(--dark-bg-0); }
+  :global(.light) & { background-color: var(--light-bg-0); }
+}
+
+.pane.left {
+  flex: 1 30%;
+  padding: 1rem;
+  border-radius: 0.5rem 0 0 0.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+
+  :global(.dark) & { background-color: var(--dark-bg-5); }
+  :global(.light) & { background-color: var(--light-bg-5); }
+
+  &.inactive {
+    flex: 0 0 0;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .subheading {
+    margin-bottom: -0.5rem;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.pane.right {
+  flex: 2 70%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 0.5rem 0.5rem 0;
+  box-sizing: border-box;
+  overflow-y: scroll;
+
+  :global(.dark) & { background-color: var(--dark-bg-4); }
+  :global(.light) & { background-color: var(--light-bg-4); }
+
+  &.inactive {
+    flex: 1 30%;
+    border-radius: 0.5rem;
+  }
+}
+
+.TextField {
+  --dark-bg-color: var(--dark-bg-3);
+  --dark-hover-bg-color: var(--dark-bg-4);
+  --light-bg-color: var(--light-bg-3);
+  --light-hover-bg-color: var(--light-bg-4);
+
+  &.search {
+    margin-bottom: 2rem;
+    font-size: large;
+  }
+
+  &.credits {
+    width: 100%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.6rem  !important;
+    font-size: smaller;
+
+    &.start { margin-right: 0.4rem; }
+    &.end { margin-left: 0.4rem; }
+  }
+}
+
+.ListItem {
+  padding: 1rem;
+  --max-lines: 2;
+  --dark-bg-color: var(--dark-bg-4);
+  --light-bg-color: var(--light-bg-4);
+  --dark-hover-bg-color: var(--dark-bg-5);
+  --light-hover-bg-color: var(--light-bg-5);
+  --dark-tag-bg-color: var(--dark-bg-2);
+  --light-tag-bg-color: var(--light-bg-2);
+  --dark-tag-text-color: gray;
+  --light-tag-text-color: dimgray;
+  --dark-divider-color: var(--dark-bg-3);
+  --light-divider-color: var(--light-bg-3);
+
+  &.active {
+    --dark-bg-color: var(--dark-bg-5);
+    --light-bg-color: var(--light-bg-5);
+  }
+}
+
+.bgOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.6;
+  transition: opacity var(--transition-time) ease;
+
+  &.inactive {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity var(--transition-time) ease;
+  }
+}

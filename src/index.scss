@@ -1,0 +1,70 @@
+/*
+This is the global stylesheet. Its contents are not scoped by CSS Modules.
+To refer to a class defined in this file in JavaScript, simply use the class
+name as a string. To refer to a class defined here in another CSS file, use :global(selector).
+*/
+
+:root {
+  /* Dark theme */
+  --dark-bg-0: #10101a;
+  --dark-bg-1: #1a1a24;
+  --dark-bg-2: #20202a;
+  --dark-bg-3: #25252f;
+  --dark-bg-4: #2a2a34;
+  --dark-bg-5: #30303a;
+
+  /* Light theme */
+  --light-bg-0: #CFCFCF;
+  --light-bg-1: #D5D5D5;
+  --light-bg-2: #DADADA;
+  --light-bg-3: #DFDFDF;
+  --light-bg-4: #E5E5E5;
+  --light-bg-5: #EFEFEF;
+
+  --transition-time: 0.2s;
+}
+
+body {
+  margin: 0px;
+  color: #CCCCCC;
+  font-family: Roboto; //Arial, Helvetica, sans-serif
+
+  > #root > div {
+    height: 100vh;
+  }
+}
+
+button {
+  font-family: Roboto;
+  font-weight: normal;
+}
+
+.dark * {
+  color: #CCCCCC;
+  transition-property: background-color, border-color, color, opacity;
+  transition-duration: var(--transition-time);
+  transition-timing-function: ease;
+}
+
+.light * {
+  color: #202020;
+  transition-property: background-color, border-color, color, opacity;
+  transition-duration: var(--transition-time);
+  transition-timing-function: ease;
+}
+
+::-webkit-scrollbar {
+  overflow: overlay;
+  width: 1px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  /*border-radius: 4px;
+  border: 2px solid transparent;
+  background-clip: padding-box;*/
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

@@ -1,0 +1,21 @@
+.root {
+  border-radius: 4px;
+  padding: 1rem;
+  box-sizing: border-box;
+  border: 0;
+  outline: none;
+  color: gray;
+
+  :global(.dark) & { background-color: var(--dark-bg-color); }
+  :global(.light) & { background-color: var(--light-bg-color); }
+
+  &:hover {
+    :global(.dark) & { background-color: var(--dark-hover-bg-color); }
+    :global(.light) & { background-color: var(--light-hover-bg-color); }
+  }
+
+  &:focus {
+    border: 0;
+    outline: none;
+  }
+}

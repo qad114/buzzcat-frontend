@@ -1,4 +1,4 @@
-import css from './CourseSections.module.css';
+import css from './CourseSections.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHashtag, faSchool, faUserTie } from '@fortawesome/free-solid-svg-icons'
 import ListItem from '../../reusable/ListItem/ListItem';

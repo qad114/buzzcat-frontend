@@ -1,4 +1,4 @@
-import css from './App.module.css';
+import css from './App.module.scss';
 
 import { useEffect, useRef, useState } from 'react';
 import { ThemeContext } from '../contexts/ThemeContext';

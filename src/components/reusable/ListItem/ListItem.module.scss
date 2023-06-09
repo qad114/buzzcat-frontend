@@ -1,0 +1,97 @@
+.root {
+  position: relative;
+
+  :global(.dark) & {
+    background-color: var(--dark-bg-color);
+    border-bottom: 1px solid var(--dark-divider-color);
+  }
+
+  :global(.light) & {
+    background-color: var(--light-bg-color);
+    border-bottom: 1px solid var(--light-divider-color);
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: opacity var(--transition-time) ease;
+
+    :global(.dark) & { background-color: var(--dark-hover-bg-color); }
+    :global(.light) & { background-color: var(--light-hover-bg-color); }
+  }
+
+  &:hover::before {
+    opacity: 1;
+    transition: opacity var(--transition-time) ease;
+  }
+
+  > * {
+    position: relative;
+  }
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+
+  > * {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    font-size: large;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:nth-last-child(2) {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+.tag {
+  border-radius: 4px;
+  padding-top: 0.1rem;
+  padding-bottom: 0.1rem;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  white-space: nowrap;
+
+  :global(.dark) & {
+    color: var(--dark-tag-text-color);
+    background-color: var(--dark-tag-bg-color);
+  }
+
+  :global(.light) & {
+    color: var(--light-tag-text-color);
+    background-color: var(--light-tag-bg-color);
+  }
+}
+
+.mainText {
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.subText {
+  width: 100%;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--max-lines);
+}

@@ -8,20 +8,20 @@
   --light-tag-text-color: dimgray;
   --dark-divider-color: var(--dark-bg-2);
   --light-divider-color: var(--light-bg-2);
-}
 
-.ListItem.active {
-  --dark-bg-color: var(--dark-btn-hover-bg-color);
-  --light-bg-color: var(--light-btn-hover-bg-color);
+  &.active {
+    --dark-bg-color: var(--dark-btn-hover-bg-color);
+    --light-bg-color: var(--light-btn-hover-bg-color);
+  }
 }
 
 .details {
   display: flex;
   align-items: center;
-}
 
-.details > .left {
-  width: 50%;
+  > .left {
+    width: 50%;
+  }
 }
 
 .icon {
@@ -32,8 +32,5 @@
 
 .WeeklySchedule {
   margin-bottom: 0.5rem;
-}
-
-.WeeklySchedule:last-of-type {
-  margin-bottom: 0;
+  &:last-of-type { margin-bottom: 0; }
 }

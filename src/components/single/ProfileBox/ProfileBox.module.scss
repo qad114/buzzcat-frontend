@@ -9,23 +9,33 @@
   margin: auto;
   border-radius: 0.5rem;
   display: flex;
-}
 
-.root.inactive {
-  visibility: hidden;
-  opacity: 0;
-}
+  :global(.dark) & { background-color: var(--dark-bg-5); }
+  :global(.light) & { background-color: var(--light-bg-5); }
 
-:global(.App.dark) .root {
-  background-color: var(--dark-bg-5);
-}
-
-:global(.App.light) .root {
-  background-color: var(--light-bg-5);
+  &.inactive {
+    visibility: hidden;
+    opacity: 0;
+  }
 }
 
 .pane {
   box-sizing: border-box;
+
+  &.left {
+    flex: 1 auto;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    border-radius: 0.5rem 0 0 0;
+
+    :global(.dark) & { background-color: var(--dark-bg-4); }
+    :global(.light) & { background-color: var(--light-bg-4); }
+  }
+
+  &.right {
+    flex: 1 80%;
+  }
 }
 
 .leftContainer {
@@ -34,42 +44,22 @@
   flex-direction: column;
 }
 
-.pane.left {
-  flex: 1 auto;
-  display: flex;
-  flex-direction: column;
-  overflow-y: scroll;
-  border-radius: 0.5rem 0 0 0;
-}
-
 .signOut {
   flex: 0 auto;
   padding: 1rem;
   font-weight: bold;
   border: 0;
   border-radius: 0 0 0 0.5rem;
-}
 
-:global(.App.dark) .signOut {
-  background-color: var(--dark-bg-4);
-  border-top: 1px solid var(--dark-bg-2);
-}
+  :global(.dark) & {
+    background-color: var(--dark-bg-4);
+    border-top: 1px solid var(--dark-bg-2);
+  }
 
-:global(.App.light) .signOut {
-  background-color: var(--light-bg-4);
-  border-top: 1px solid var(--light-bg-2);
-}
-
-:global(.App.dark) .pane.left {
-  background-color: var(--dark-bg-4);
-}
-
-:global(.App.light) .pane.left {
-  background-color: var(--light-bg-4);
-}
-
-.pane.right {
-  flex: 1 80%;
+  :global(.right) & {
+    background-color: var(--light-bg-4);
+    border-top: 1px solid var(--light-bg-2);
+  }
 }
 
 .profileIcon {
@@ -83,28 +73,18 @@
   margin-top: 2rem;
   margin-bottom: 0.5rem;
   text-align: center;
-}
 
-:global(.App.dark) .profileIcon {
-  background-color: var(--dark-bg-2);
-}
-
-:global(.App.light) .profileIcon {
-  background-color: var(--light-bg-2);
+  :global(.dark) & { background-color: var(--dark-bg-2); }
+  :global(.light) & { background-color: var(--light-bg-2); }
 }
 
 .displayName {
   font-weight: bold;
   text-align: center;
   padding-bottom: 1.5rem;
-}
 
-:global(.App.dark) .displayName {
-  border-bottom: 1px solid var(--dark-bg-2);
-}
-
-:global(.App.light) .displayName {
-  border-bottom: 1px solid var(--light-bg-2);
+  :global(.dark) & { border-bottom: 1px solid var(--dark-bg-2); }
+  :global(.light) & { border-bottom: 1px solid var(--dark-bg-2); }
 }
 
 .tab {

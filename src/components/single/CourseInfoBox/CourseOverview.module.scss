@@ -2,15 +2,12 @@
   margin: 2rem;
   display: flex;
   flex-direction: column;
-}
 
-.root > div {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-
-.root > div:nth-child(1) {
-  padding-top: 0;
+  > div {
+    padding-top: 1rem;
+    &:first-child { padding-top: 0; }
+    padding-bottom: 1rem;
+  }
 }
 
 .title {
