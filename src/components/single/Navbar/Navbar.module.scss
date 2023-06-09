@@ -15,7 +15,15 @@
   margin-top: auto;
   margin-bottom: auto;
   padding-left: 0.5rem;
-  font-weight: lighter;
+
+  .name {
+    font-weight: bold;
+  }
+
+  .term {
+    font-weight: normal;
+    color: gray;
+  }
 }
 
 .items {
