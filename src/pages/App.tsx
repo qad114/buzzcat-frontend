@@ -37,17 +37,6 @@ export default function App() {
   const [currentCourse, setCurrentCourse] = useState<Course | null>(null);
 
   onEmailSignIn(async token => {
-    console.log('sign in');
-    const user = await getUser(token);
-    setUser(user);
-  })
-
-  onEmailSignOut(() => {
-    console.log('sign out');
-    setUser(null);
-  });
-
-  onEmailSignIn(async token => {
     const user = await getUser(token);
     setUser(user);
   })
