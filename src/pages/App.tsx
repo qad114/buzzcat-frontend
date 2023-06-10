@@ -15,6 +15,7 @@ import { getToken, onEmailSignIn, onEmailSignOut } from '../auth/firebase';
 import { getUser } from '../api/auth';
 import { searchCourses } from '../api/courses';
 import { UserContext } from '../contexts/UserContext';
+import { prereqsSatisfied } from '../misc';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const INPUT_TIMEOUT = 200;
@@ -110,20 +111,21 @@ export default function App() {
                 }
               }
             }}>
-              {/*searchResults.map((entry, index) => <SearchResultCard className={[css.SearchResultCard, currentCourse === entry ? css.active : css.inactive].join(' ')} key={entry.subject + entry.number} result={entry} onClick={() => {onCourseCardClick(index);}} />)*/}
-              {searchResults.map((entry: Course, index: number) => 
-                <ListItem 
+              {searchResults.map((entry: Course, index: number) => {
+                const satisfied = !user || !entry.prerequisites || Object.keys(entry.prerequisites).length === 0 || prereqsSatisfied(entry.prerequisites, user.courseHistory);
+                return <ListItem 
                   className={[css.ListItem, currentCourse === entry ? css.active : css.inactive].join(' ')}
                   key={entry.subject + ' ' + entry.number}
                   tags={[
                     entry.subject + ' ' + entry.number,
                     entry.credits.operator === null ? `${entry.credits.low} credit${entry.credits.low === 1 ? '' : 's'}` : `${entry.credits.low} ${entry.credits.operator.toLowerCase()} ${entry.credits.high} credits`
                   ]}
+                  warningTags={[satisfied ? undefined : 'Missing prerequisite(s)']}
                   mainText={entry.title}
                   subText={entry.description}
                   onClick={() => onCourseCardClick(index)}
-                />
-              )}
+                />;
+              })}
             </div>
 
             {currentCourse !== null && <CourseInfoBox

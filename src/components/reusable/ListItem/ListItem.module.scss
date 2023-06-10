@@ -76,6 +76,11 @@
     color: var(--light-tag-text-color);
     background-color: var(--light-tag-bg-color);
   }
+
+  &.warning {
+    :global(.dark) & { background-color: var(--dark-warning-tag-bg-color); }
+    :global(.light) & { background-color: var(--light-warning-tag-bg-color); }
+  }
 }
 
 .mainText {
