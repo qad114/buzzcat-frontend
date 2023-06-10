@@ -1,6 +1,6 @@
-import { getCourse } from '../../../api/courses';
-import { PrereqCourseNode, PrereqNode, PrereqOperatorNode, PrereqTestScoreNode } from '../../../types';
-import css from './CoursePrerequisites.module.scss';
+import { getCourse } from '../../../../api/courses';
+import { PrereqCourseNode, PrereqNode } from '../../../../types';
+import css from '#src/styles/CoursePrerequisites.module.scss';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 

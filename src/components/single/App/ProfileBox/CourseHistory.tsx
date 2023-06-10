@@ -1,10 +1,10 @@
 import { useContext, useState } from 'react';
-import { alterSetting } from '../../../api/auth';
-import { addToCourseHistory } from '../../../api/courseHistory';
-import { getToken } from '../../../auth/firebase';
-import { UserContext } from '../../../contexts/UserContext';
-import ToggleSwitch from '../../reusable/ToggleSwitch/ToggleSwitch';
-import css from './CourseHistory.module.scss';
+import { alterSetting } from '../../../../api/auth';
+import { addToCourseHistory } from '../../../../api/courseHistory';
+import { getToken } from '../../../../auth/firebase';
+import { UserContext } from '../../../../contexts/UserContext';
+import ToggleSwitch from '../../../reusable/ToggleSwitch';
+import css from '#src/styles/CourseHistory.module.scss';
 
 export default function CourseHistory({ className = '' }: {className?: string}) {
   const { user, setUser } = useContext(UserContext);

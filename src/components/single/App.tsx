@@ -1,21 +1,21 @@
-import css from './App.module.scss';
+import css from '#src/styles/App.module.scss';
 
 import { useEffect, useRef, useState } from 'react';
-import { ThemeContext } from '../contexts/ThemeContext';
-import { Course, User } from '../types';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { Course, User } from '../../types';
 
-import CourseInfoBox from '../components/single/CourseInfoBox/CourseInfoBox';
-import LoginBox from '../components/single/LoginBox/LoginBox';
-import Navbar from '../components/single/Navbar/Navbar';
-import TextField from '../components/reusable/TextField/TextField';
-import ListItem from '../components/reusable/ListItem/ListItem';
-import ProfileBox from '../components/single/ProfileBox/ProfileBox';
+import CourseInfoBox from './App/CourseInfoBox';
+import LoginBox from './App/LoginBox';
+import Navbar from './App/Navbar';
+import TextField from '../reusable/TextField';
+import ListItem from '../reusable/ListItem';
+import ProfileBox from './App/ProfileBox';
 
-import { getToken, onEmailSignIn, onEmailSignOut } from '../auth/firebase';
-import { getUser } from '../api/auth';
-import { searchCourses } from '../api/courses';
-import { UserContext } from '../contexts/UserContext';
-import { prereqsSatisfied } from '../misc';
+import { getToken, onEmailSignIn, onEmailSignOut } from '../../auth/firebase';
+import { getUser } from '../../api/auth';
+import { searchCourses } from '../../api/courses';
+import { UserContext } from '../../contexts/UserContext';
+import { prereqsSatisfied } from '../../misc';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const INPUT_TIMEOUT = 200;

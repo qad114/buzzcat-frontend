@@ -1,9 +1,9 @@
-import css from './CourseSections.module.scss';
+import css from '#src/styles/CourseSections.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHashtag, faSchool, faUserTie } from '@fortawesome/free-solid-svg-icons'
-import ListItem from '../../reusable/ListItem/ListItem';
-import WeeklySchedule from "../../reusable/WeeklySchedule/WeeklySchedule";
-import { Section } from '../../../types';
+import ListItem from '../../../reusable/ListItem';
+import WeeklySchedule from "../../../reusable/WeeklySchedule";
+import { Section } from '../../../../types';
 
 export default function CourseSections({ className = '', sections }: {className?: string, sections: Section[]}) {
   return (

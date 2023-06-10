@@ -1,5 +1,5 @@
-import css from './LoginBox.module.scss';
-import TextField from '../../reusable/TextField/TextField';
+import css from '#src/styles/LoginBox.module.scss';
+import TextField from '../../reusable/TextField';
 
 import { emailSignIn } from '../../../auth/firebase';
 import { useRef } from 'react';

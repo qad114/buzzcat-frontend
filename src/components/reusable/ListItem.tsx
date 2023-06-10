@@ -1,4 +1,4 @@
-import css from './ListItem.module.scss';
+import css from '#src/styles/ListItem.module.scss';
 
 export default function ListItem({ className = '', tags = [], warningTags = [], mainText, subText, onClick }:
     {className?: string, tags?: (string | undefined)[], warningTags?: (string | undefined)[], mainText: string, subText?: string | JSX.Element, onClick?: () => void}) {

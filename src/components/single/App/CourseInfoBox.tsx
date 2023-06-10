@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
-import ListItem from '../../reusable/ListItem/ListItem'
-import css from './CourseInfoBox.module.scss';
-import CourseOverview from './CourseOverview';
-import CourseSections from './CourseSections';
-import CoursePrerequisites from './CoursePrerequisites';
+import ListItem from '../../reusable/ListItem'
+import css from '#src/styles/CourseInfoBox.module.scss';
+import CourseOverview from './CourseInfoBox/CourseOverview';
+import CourseSections from './CourseInfoBox/CourseSections';
+import CoursePrerequisites from './CourseInfoBox/CoursePrerequisites';
 import { Course, PrereqNode, Section } from '../../../types';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;

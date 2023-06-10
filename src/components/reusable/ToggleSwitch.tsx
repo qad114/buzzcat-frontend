@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useState } from 'react';
-import css from './ToggleSwitch.module.scss';
+import css from '#src/styles/ToggleSwitch.module.scss';
 
 export default function ToggleSwitch({ className = '', value, setter }: {className?: string, value: boolean, setter: Dispatch<SetStateAction<boolean>>}) {
   return (

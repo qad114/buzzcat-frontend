@@ -1,9 +1,9 @@
 import { User } from '../../../types';
 import { emailSignOut } from '../../../auth/firebase';
-import ListItem from '../../reusable/ListItem/ListItem';
-import css from './ProfileBox.module.scss';
+import ListItem from '../../reusable/ListItem';
+import css from '#src/styles/ProfileBox.module.scss';
 import { useContext, useState } from 'react';
-import CourseHistory from './CourseHistory';
+import CourseHistory from './ProfileBox/CourseHistory';
 import { UserContext } from '../../../contexts/UserContext';
 
 export default function ProfileBox({ className = '', active }: {className?: string, active: boolean}) {
