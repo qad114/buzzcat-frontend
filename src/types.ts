@@ -67,12 +67,17 @@ export type MeetingLocation = {
 export type User = {
   uid: string,
   displayName: string,
-  courseHistory: HistoricCourse[]
-}
+  courseHistory: HistoricCourse[],
+  settings: UserSettings
+};
 
 export type HistoricCourse = {
   subject: string,
   number: string,
   level: string,
   grade: string
+};
+
+export type UserSettings = {
+  courseHistoryEnabled: boolean
 };

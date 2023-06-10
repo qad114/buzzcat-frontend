@@ -1,3 +1,5 @@
+import { User } from "../types";
+
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export async function addToCourseHistory(token: string, subject: string, number: string, level: string, grade: string) {

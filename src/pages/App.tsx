@@ -112,7 +112,7 @@ export default function App() {
               }
             }}>
               {searchResults.map((entry: Course, index: number) => {
-                const satisfied = !user || !entry.prerequisites || Object.keys(entry.prerequisites).length === 0 || prereqsSatisfied(entry.prerequisites, user.courseHistory);
+                const satisfied = !user || !user.settings.courseHistoryEnabled || !entry.prerequisites || Object.keys(entry.prerequisites).length === 0 || prereqsSatisfied(entry.prerequisites, user.courseHistory);
                 return <ListItem 
                   className={[css.ListItem, currentCourse === entry ? css.active : css.inactive].join(' ')}
                   key={entry.subject + ' ' + entry.number}
