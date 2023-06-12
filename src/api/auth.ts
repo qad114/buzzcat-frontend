@@ -15,10 +15,8 @@ export async function getUser(token: string) {
 }
 
 export async function alterSetting(token: string, user: User, setter: (user: User) => any, key: keyof UserSettings, value: boolean) {
-  const oldValue = structuredClone(user.settings[key]);
-  const userCopy = structuredClone(user);
-  userCopy.settings[key] = value;
-  setter(userCopy);
+  const oldValue = user.settings[key];
+  setter({ ...user, settings: {[key]: value} })
 
   const response = await fetch(`${BACKEND_URL}/auth/alter-setting`, {
     method: 'POST',
@@ -34,8 +32,7 @@ export async function alterSetting(token: string, user: User, setter: (user: Use
   const json = await response.json();
 
   if (!json.success) {
-    userCopy.settings[key] = oldValue;
-    setter(userCopy);
+    setter({ ...user, settings: {[key]: oldValue} });
     throw new Error('Request failed, setting reverted');
   }
 }
