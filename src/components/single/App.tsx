@@ -82,19 +82,24 @@ export default function App() {
           <div className={css.body}>
 
             <div className={[css.pane, css.left, currentCourse === null ? css.active : css.inactive].join(' ')}>
-
-              <TextField className={[css.TextField, css.search].join(' ')} defaultText={'Search...'} inputRef={searchInput} onChange={onTextFieldChange} />
-              
-              <div className={css.subheading}>Credits</div>
-              <div className={css.row}>
-                <TextField className={[css.TextField, css.credits, css.start].join(' ')} defaultText={'Min'} inputRef={creditsMinInput} onChange={() => {
-                  if (creditsMinInput.current) creditsMinInput.current.value = creditsMinInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
-                  onTextFieldChange();
-                }} />
-                <TextField className={[css.TextField, css.credits, css.end].join(' ')} defaultText={'Max'} inputRef={creditsMaxInput} onChange={() => {
-                  if (creditsMaxInput.current) creditsMaxInput.current.value = creditsMaxInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
-                  onTextFieldChange();
-                }} />
+              <div className={css.leftContainer}>
+                <TextField className={[css.TextField, css.search].join(' ')} defaultText={'Search...'} inputRef={searchInput} onChange={onTextFieldChange} />
+                
+                <div className={css.subheading}>Credits</div>
+                <div className={css.row}>
+                  <TextField className={[css.TextField, css.credits, css.start].join(' ')} defaultText={'Min'} inputRef={creditsMinInput} onChange={() => {
+                    if (creditsMinInput.current) creditsMinInput.current.value = creditsMinInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
+                    onTextFieldChange();
+                  }} />
+                  <TextField className={[css.TextField, css.credits, css.end].join(' ')} defaultText={'Max'} inputRef={creditsMaxInput} onChange={() => {
+                    if (creditsMaxInput.current) creditsMaxInput.current.value = creditsMaxInput.current.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');
+                    onTextFieldChange();
+                  }} />
+                </div>
+              </div>
+              <div className={css.leftFooter}>
+                Check OSCAR/Banner for accurate information<br/>
+                By <a href=''>Hamza Qadri</a> | <a href=''>Terms of Service</a> | <a href=''>Privacy Policy</a>
               </div>
 
             </div>
