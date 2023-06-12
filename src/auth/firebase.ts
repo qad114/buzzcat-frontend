@@ -26,23 +26,23 @@ export const emailSignUp = async (email: string, password: string) => {
 
 let fbUser: FirebaseUser | null = null;
 
-let emailSignInListeners: ((user: FirebaseUser) => void)[] = []
-let emailSignOutListeners: (() => void)[] = []
+let emailSignInListener: (user: FirebaseUser) => void;
+let emailSignOutListener: () => void;
 
 export const onEmailSignIn = (listener: (user: FirebaseUser) => void) => {
-  emailSignInListeners.push(listener);
+  emailSignInListener = listener;
 };
 
 export const onEmailSignOut = (listener: () => void) => {
-  emailSignOutListeners.push(listener);
+  emailSignOutListener = listener;
 };
 
 onAuthStateChanged(auth, async user => {
   fbUser = user;
   if (user) {
-    for (const listener of emailSignInListeners) listener(user);
+    emailSignInListener(user);
   } else {
-    for (const listener of emailSignOutListeners) listener();
+    emailSignOutListener();
   }
 });
 
