@@ -58,6 +58,7 @@
   border-radius: 0 0 0 0.5rem;
 
   :global(.dark) & { background-color: var(--dark-bg-3); }
+  :global(.light) & { background-color: var(--light-bg-3); }
 }
 
 .pane.right {
