@@ -27,7 +27,7 @@ name as a string. To refer to a class defined here in another CSS file, use :glo
 body {
   margin: 0px;
   color: #CCCCCC;
-  font-family: Roboto; //Arial, Helvetica, sans-serif
+  font-family: Roboto, Arial, sans-serif;
 
   > #root > div {
     height: 100vh;
@@ -35,8 +35,8 @@ body {
 }
 
 button {
-  font-family: Roboto;
-  font-weight: normal;
+  font-family: inherit;
+  font-weight: inherit;
 }
 
 .dark * {
