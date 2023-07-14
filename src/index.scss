@@ -4,6 +4,18 @@ To refer to a class defined in this file in JavaScript, simply use the class
 name as a string. To refer to a class defined here in another CSS file, use :global(selector).
 */
 
+@font-face {
+  font-family: Roboto;
+  src: local('Roboto Regular'), url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: local('Roboto Bold'), url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
+  font-weight: bold;
+}
+
 :root {
   /* Dark theme */
   --dark-bg-0: #10101a;
