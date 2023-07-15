@@ -1,25 +1,20 @@
-.root {
-  margin: 2rem;
+.ListItem {
+  padding: 1rem;
+  --dark-bg-color: var(--dark-bg-4);
+  --light-bg-color: var(--light-bg-4);
+  --dark-tag-bg-color: var(--dark-bg-2);
+  --light-tag-bg-color: var(--light-bg-2);
+  --dark-tag-text-color: gray;
+  --light-tag-text-color: dimgray;
+  --dark-hover-bg-color: var(--dark-bg-5);
+  --light-hover-bg-color: var(--light-bg-5);
+  --dark-divider-color: var(--dark-bg-2);
+  --light-divider-color: var(--light-bg-2);
 }
 
-.prereqListNested.inactive {
-  display: none;
-}
-
-.prereqNode {
-  padding: 0.5em;
-  border-radius: 0.5em;
-  border: 0;
-
-  &.operator {
-    font-style: italic;
-  }
-}
-
-.prereqNode.course {
-  background-color: transparent;
-  padding: 0;
-  font-size: medium;
-  text-decoration: underline;
-  margin-left: 0.5rem;
+.indentedBlock {
+  margin-left: 1.5rem;
+  
+  :global(.dark) & { border-left: 1px solid var(--dark-bg-2); }
+  :global(.light) & { border-left: 1px solid var(--light-bg-2); }
 }

@@ -1,6 +1,7 @@
 import { getCourse } from '../../../../api/courses';
 import { PrereqCourseNode, PrereqNode } from '../../../../types';
 import css from '#src/styles/CoursePrerequisites.module.scss';
+import ListItem from '../../../reusable/ListItem';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
@@ -40,32 +41,23 @@ export default function CoursePrerequisites({ className = '', prereqTree }: {cla
     if (root.type === 'operator') {
       const text = root.value === 'or' ? 'One or more of:' : 'All of:';
       return (
-        <li><span className={[css.prereqNode, css.operator].join(' ')}>{text}</span>
-          <ul className={css.prereqListNested}>
+        <>
+          <ListItem className={css.ListItem} mainText={text} />
+          <div className={css.indentedBlock}>
             {root.children.map((node, index) => prereqsToHTML(node, key + index))}
-          </ul>
-        </li>
-      )
+          </div>
+        </>
+      );
     } else if (root.type === 'course') {
-      return (
-        <li><button className={[css.prereqNode, css.course].join(' ')} onClick={() => onCourseNodeClick(root.subject, root.number, key)}>{root.subject + ' ' + root.number}</button>
-          <ul className={css.prereqListNested}>
-            {root.children === undefined ? null : root.children.map((node, index) => prereqsToHTML(node, key + index))}
-          </ul>
-        </li>
-      )
+      return <ListItem className={css.ListItem} tags={[root.subject + ' ' + root.number]} mainText={''} />; // TODO: Populate these with class names dynamically
     } else if (root.type === 'test_score') {
-      return (
-        <li><span className={css.prereqNode}>{root.test + ' ' + root.score}</span></li>
-      )
+      return <ListItem className={css.ListItem} tags={['Test Score']} mainText={root.test + ' ' + root.score} />;
     }
   }
 
   return (
     <div className={[CoursePrerequisites.name, css.root, className].join(' ')}>
-      <ul>
-        {prereqsToHTML(prereqTree)}
-      </ul>
+      {prereqsToHTML(prereqTree)}
     </div>
   )
 }
