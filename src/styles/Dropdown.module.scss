@@ -1,0 +1,37 @@
+.btn {
+  font-size: 1.25rem;
+  font-weight: bold;
+  border: 0;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+
+  :global(.dark) & { background-color: var(--dark-bg-2); }
+  :global(.light) & { background-color: var(--light-bg-2); }
+}
+
+.items {
+  position: absolute;
+  font-size: 1.5rem;
+  display: none;
+  border-radius: 0.25rem;
+  max-height: 10rem;
+  overflow-y: scroll;
+  z-index: 1;
+  box-shadow: 0 2px 2px #00000050;
+
+  :global(.dark) & { background-color: var(--dark-bg-3); }
+  :global(.light) & { background-color: var(--light-bg-3); }
+
+  .root:hover & {
+    display: block;
+  }
+
+  > * {
+    padding: 0.5rem;
+
+    &:hover {
+      :global(.dark) & { background-color: var(--dark-bg-4); }
+      :global(.light) & { background-color: var(--light-bg-4); }
+    }
+  }
+}

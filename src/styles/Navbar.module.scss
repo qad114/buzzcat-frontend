@@ -1,5 +1,6 @@
 .root {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   padding: 0.5rem;
   margin: 0px;
@@ -8,30 +9,28 @@
   :global(.light) & { background-color: var(--light-bg-0); }
 }
 
+.left {
+  display: flex;
+  align-items: center;
+}
+
 .heading {
-  position: relative;
-  top: 0;
-  bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
-  padding-left: 0.5rem;
+  margin: 0 1rem 0 0.5rem;
+  font-weight: bold;
+}
 
-  .name {
-    font-weight: bold;
-  }
+.dropdownItem {
+  --dark-divider-color: var(--dark-bg-2);
+  --light-divider-color: var(--light-bg-2);
+  font-weight: normal;
 
-  .term {
-    font-weight: normal;
-    color: gray;
+  &:last-child {
+    --dark-divider-color: unset;
+    --light-divider-color: unset;
   }
 }
 
 .items {
-  position: relative;
-  top: 0;
-  bottom: 0;
-  margin-top: auto;
-  margin-bottom: auto;
   display: flex;
   justify-content: right;
   align-items: flex-end;
