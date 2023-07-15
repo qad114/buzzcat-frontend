@@ -1,5 +1,8 @@
 .root {
   position: relative;
+  border: 0;
+  text-align: left;
+  width: 100%;
 
   :global(.dark) & {
     background-color: var(--dark-bg-color);
