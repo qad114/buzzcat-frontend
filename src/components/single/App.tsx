@@ -17,9 +17,16 @@ import { searchCourses } from '../../api/courses';
 import { UserContext } from '../../contexts/UserContext';
 import { prereqsSatisfied } from '../../misc';
 
+import { AutoSizer, CellMeasurer, CellMeasurerCache, InfiniteLoader, List } from 'react-virtualized';
+
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const INPUT_TIMEOUT = 200;
 const PAGE_SIZE = 50;
+
+const virtualizedCache = new CellMeasurerCache({
+  fixedWidth: true,
+  defaultHeight: 128
+});
 
 export default function App() {
   const [theme, setTheme] = useState('dark');
@@ -30,6 +37,7 @@ export default function App() {
   const creditsMinInput = useRef<HTMLInputElement>(null);
   const creditsMaxInput = useRef<HTMLInputElement>(null);
   const rightPane = useRef<HTMLDivElement>(null);
+  const searchResultsList = useRef<List>(null);
 
   let textFieldTimer: ReturnType<typeof setTimeout>;
 
@@ -37,6 +45,54 @@ export default function App() {
   const [searchOffset, setSearchOffset] = useState(0);
   const [searchResults, setSearchResults] = useState<Course[]>([]);
   const [currentCourse, setCurrentCourse] = useState<Course | null>(null);
+  
+  function isRowLoaded({ index }: any) {
+    console.log(`isRowLoaded ${index}`);
+    console.log(searchResults);
+    return !!searchResults[index];
+  }
+
+  function loadMoreRows({ startIndex, stopIndex }: any) {
+    console.log('called loadMoreRows');
+    return searchCourses({
+      term: '202308',
+      query: searchInput.current?.value || '',
+      creditsLow: creditsMinInput.current?.value,
+      creditsHigh: creditsMaxInput.current?.value,
+      offset: startIndex,
+      limit: stopIndex - startIndex
+    }).then(courses => {
+      setSearchResults(searchResults.concat(courses));
+    });
+  }
+
+  function renderRow({ index, key, style, parent }: any) {
+    const entry = searchResults[index];
+    const satisfied = !user || !user.settings.courseHistoryEnabled || !entry.prerequisites || Object.keys(entry.prerequisites).length === 0 || prereqsSatisfied(entry.prerequisites, user.courseHistory);
+    return <CellMeasurer
+      key={key}
+      cache={virtualizedCache}
+      parent={parent}
+      columnIndex={0}
+      rowIndex={index}
+    >
+      {({ registerChild }) => (
+        <ListItem 
+          className={[css.ListItem, currentCourse === entry ? css.active : css.inactive].join(' ')}
+          style={style}
+          ref={registerChild}
+          tags={[
+            entry.subject + ' ' + entry.number,
+            entry.credits.operator === null ? `${entry.credits.low} credit${entry.credits.low === 1 ? '' : 's'}` : `${entry.credits.low} ${entry.credits.operator.toLowerCase()} ${entry.credits.high} credits`
+          ]}
+          warningTags={[satisfied ? undefined : 'Missing prerequisite(s)']}
+          mainText={entry.title}
+          subText={entry.description}
+          onClick={() => onCourseCardClick(index)}
+        />
+      )}
+    </CellMeasurer>
+  }
 
   onEmailSignIn(async fbUser => {
     const user = await getUser(await getToken() as string);
@@ -46,7 +102,7 @@ export default function App() {
   onEmailSignOut(() => setUser(null));
 
   async function search(offset = 0, limit = 50, append = false) {
-    console.log(`searching from ${offset} to ${offset + limit}`)
+    console.log(`searching from ${offset} to ${offset + limit}`);
     const res = await searchCourses({
       term: '202308',
       query: searchInput.current?.value || '',
@@ -60,6 +116,11 @@ export default function App() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {search();}, []) // populate results in the beginning
+
+  useEffect(() => {
+    virtualizedCache.clearAll();
+    searchResultsList.current?.recomputeRowHeights();
+  }, [searchResults])
  
   function onTextFieldChange() {
     clearTimeout(textFieldTimer);
@@ -97,40 +158,36 @@ export default function App() {
                   }} />
                 </div>
               </div>
-              <div className={css.leftFooter}>
+              <div className={css.leftFooter} onClick={() => {searchResultsList?.current?.forceUpdateGrid(); console.log('recomputed');}}>
                 Check OSCAR/Banner for accurate information<br/>
                 By <a href=''>Hamza Qadri</a> | <a href=''>Terms of Service</a> | <a href=''>Privacy Policy</a>
               </div>
 
             </div>
 
-            <div className={[css.pane, css.right, currentCourse === null ? css.active : css.inactive].join(' ')} ref={rightPane} onScroll={() => {
-              // Check if we have scrolled to the bottom
-              if (rightPane.current) {
-                const scrollOffset = rightPane.current.scrollHeight - rightPane.current.scrollTop - rightPane.current.clientHeight;
-                console.log(scrollOffset);
-                if (scrollOffset <= 1) {
-                  console.log('reached bottom');
-                  search(searchOffset + PAGE_SIZE, PAGE_SIZE, true); // TODO: ugly and potentially a race condition, maybe track offset within search()
-                  setSearchOffset(searchOffset + PAGE_SIZE);
-                }
-              }
-            }}>
-              {searchResults.map((entry: Course, index: number) => {
-                const satisfied = !user || !user.settings.courseHistoryEnabled || !entry.prerequisites || Object.keys(entry.prerequisites).length === 0 || prereqsSatisfied(entry.prerequisites, user.courseHistory);
-                return <ListItem 
-                  className={[css.ListItem, currentCourse === entry ? css.active : css.inactive].join(' ')}
-                  key={entry.subject + ' ' + entry.number}
-                  tags={[
-                    entry.subject + ' ' + entry.number,
-                    entry.credits.operator === null ? `${entry.credits.low} credit${entry.credits.low === 1 ? '' : 's'}` : `${entry.credits.low} ${entry.credits.operator.toLowerCase()} ${entry.credits.high} credits`
-                  ]}
-                  warningTags={[satisfied ? undefined : 'Missing prerequisite(s)']}
-                  mainText={entry.title}
-                  subText={entry.description}
-                  onClick={() => onCourseCardClick(index)}
-                />;
-              })}
+            <div className={[css.pane, css.right, currentCourse === null ? css.active : css.inactive].join(' ')} ref={rightPane}>
+              <InfiniteLoader
+                isRowLoaded={isRowLoaded}
+                loadMoreRows={loadMoreRows}
+                rowCount={10000}
+              >
+                {({ onRowsRendered, registerChild }) => (
+                  <AutoSizer>
+                    {({ width, height }) => <List
+                      width={width}
+                      height={height}
+                      onRowsRendered={onRowsRendered}
+                      minimumBatchSize={50}
+                      ref={searchResultsList}
+                      deferredMeasurementCache={virtualizedCache}
+                      rowHeight={virtualizedCache.rowHeight}
+                      rowRenderer={renderRow}
+                      rowCount={searchResults.length}
+                      overscanRowCount={3} />
+                    }
+                  </AutoSizer>
+                )}
+              </InfiniteLoader>
             </div>
 
             {currentCourse !== null && <CourseInfoBox
